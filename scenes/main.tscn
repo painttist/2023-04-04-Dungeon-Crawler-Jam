@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctlxnl2xtxx1m"]
+[gd_scene load_steps=5 format=3 uid="uid://bh7phi4bayhm7"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/player.tscn" id="2_h8jw0"]
+[ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
+shader = ExtResource("3_xho3t")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/multiplier = 0.164
+shader_parameter/softness = 0.799
 
 [node name="Node3D" type="Node3D"]
 
@@ -14,3 +21,13 @@ data = {
 
 [node name="player" parent="." instance=ExtResource("2_h8jw0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87699, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0gqbr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
