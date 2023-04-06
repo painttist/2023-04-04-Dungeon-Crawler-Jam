@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdsewocli8rpy"]
+[gd_scene load_steps=13 format=3 uid="uid://cdsewocli8rpy"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/player.tscn" id="2_h8jw0"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
 [ext_resource type="Script" path="res://scripts/chest.gd" id="4_32v0m"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="5_j6c4c"]
+[ext_resource type="Texture2D" uid="uid://dcrm7uq2ijiow" path="res://Sprites/slime_girl.png" id="6_7asmn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
@@ -18,8 +19,17 @@ size = Vector2(1, 1)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hd7j2"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kepnr"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("6_7asmn")
+metallic = 0.27
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_07526"]
-size = Vector2(1, 2)
+material = SubResource("StandardMaterial3D_kepnr")
+size = Vector2(1, 1.5)
+orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cy8cd"]
 
@@ -63,7 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -4)
 script = ExtResource("5_j6c4c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="enemy"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.114, 0)
 mesh = SubResource("PlaneMesh_07526")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
