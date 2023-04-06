@@ -13,6 +13,8 @@ const TWEEN_DURATION = 0.3
 
 var tween
 
+var health = 10
+
 signal acted
 
 func move_forward() -> void:
@@ -22,13 +24,16 @@ func move_forward() -> void:
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_bob")
 	else:
-		print_debug("touching ", ray_front.get_collider().name)
+		animation.play("head_bob")
+#		print_debug("touching ", ray_front.get_collider().name)
 
 func move_back() -> void:
 	if not ray_back.is_colliding():
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.BACK * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
+		animation.play("head_bob")
+	else:
 		animation.play("head_bob")
 
 func move_left() -> void:
@@ -37,6 +42,8 @@ func move_left() -> void:
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.LEFT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_left")
+	else:
+		animation.play("head_bob")
 
 func move_right() -> void:
 	if not ray_right.is_colliding():
@@ -44,6 +51,8 @@ func move_right() -> void:
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.RIGHT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_right")
+	else:
+		animation.play("head_bob")
 
 func turn_right() -> void:
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
@@ -60,10 +69,17 @@ func attack() -> void:
 			col.take_damage(self, 2)
 	acted.emit()
 
+func take_damage(amount):
+	health -= amount
+	animation.play("take_damage")
+	print("Player health: ", health)
+
 func _physics_process(_delta):
 	if tween is Tween:
 		if tween.is_running():
 			return
+	if animation.is_playing():
+		return
 	if Input.is_action_just_pressed("Space"):
 		attack()
 	elif Input.is_action_pressed("W"):

@@ -7,9 +7,8 @@ func _physics_process(delta):
 
 var health = 10
 
-func take_damage(attacker, damage):
+func take_damage(attacker : Player, damage):
 	health -= damage
-	attacker.move_back()
 	print("chest health: ", health)
 	check_death()
 

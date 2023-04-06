@@ -73,6 +73,7 @@ func get_intersect_to_player() -> Dictionary:
 func move_towards_player():
 	var dist = get_dist_to_player()
 	if (dist <= MIN_MOVE_DISTANCE):
+		player.take_damage(2)
 		return
 	
 	if (get_intersect_to_player() and dist >= MAX_DISTANCE) :

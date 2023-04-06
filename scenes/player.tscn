@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ewui18jjcr1r"]
+[gd_scene load_steps=9 format=3 uid="uid://ewui18jjcr1r"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_uycx0"]
 
@@ -81,12 +81,41 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, -0.0436332, 0.00349066), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_06l7j"]
+resource_name = "take_damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.233, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.075), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.233, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.101229, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ylb84"]
 _data = {
 "RESET": SubResource("Animation_i5l0a"),
 "head_bob": SubResource("Animation_6dngg"),
 "head_tilt_left": SubResource("Animation_smdo2"),
-"head_tilt_right": SubResource("Animation_335y0")
+"head_tilt_right": SubResource("Animation_335y0"),
+"take_damage": SubResource("Animation_06l7j")
 }
 
 [node name="player" type="Node3D"]
