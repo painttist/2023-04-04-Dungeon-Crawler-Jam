@@ -10,6 +10,11 @@ extends StaticBody3D
 @onready var level : GridMap = get_parent().get_node("level")
 
 const TWEEN_DURATION = 0.3
+const ROTATION_SPEED = 8.0
+
+const MAX_DISTANCE = 6.0
+
+const MIN_MOVE_DISTANCE = 2.2
 
 var tween
 
@@ -29,8 +34,18 @@ func move_right() -> void:
 	tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "transform", transform.translated(Vector3.RIGHT * 2), TWEEN_DURATION)
 
-func _physics_process(_delta):
-	look_at(player.position)
+func get_dist_to_player() -> float:
+	return self.transform.origin.distance_to(player.transform.origin)
+
+func look_at_player_smooth(delta):
+	var current_rot = transform.basis.get_rotation_quaternion().normalized()
+	var look_at_rot = transform.looking_at(player.position).basis.get_rotation_quaternion().normalized()
+	
+	transform.basis = Basis(current_rot.slerp(look_at_rot, delta * ROTATION_SPEED))
+	
+func _physics_process(delta):
+	if get_intersect_to_player().is_empty():
+		look_at_player_smooth(delta)
 
 var health = 6
 
@@ -46,19 +61,21 @@ func check_death():
 		
 const FLOAT_EPSILON = 0.00001
 
-func move_towards_player():
-	var dist = self.transform.origin.distance_to(player.transform.origin)
-	if (dist <= 2.2):
-		return
-	
+func get_intersect_to_player() -> Dictionary:
 	var space_state = get_world_3d().get_direct_space_state()
 	var params = PhysicsRayQueryParameters3D.new()
 	params.from = self.transform.origin
 	params.to = player.transform.origin
 	params.exclude = [self.get_rid()]
 	params.collision_mask = 1
-	var result = space_state.intersect_ray(params)
-	if (result and dist >= 6) :
+	return space_state.intersect_ray(params)
+
+func move_towards_player():
+	var dist = get_dist_to_player()
+	if (dist <= MIN_MOVE_DISTANCE):
+		return
+	
+	if (get_intersect_to_player() and dist >= MAX_DISTANCE) :
 		return
 #	print("Moving towards player")
 #	print(dist)
