@@ -118,7 +118,7 @@ _data = {
 "take_damage": SubResource("Animation_06l7j")
 }
 
-[node name="player" type="Node3D"]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_uycx0")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -137,6 +137,7 @@ target_position = Vector3(2.5, 0, 0)
 target_position = Vector3(-2.5, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05049, 0)
 shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

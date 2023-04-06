@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2l1gfpihe2es"]
+
+[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_uanfd"]
+[ext_resource type="Texture2D" uid="uid://das0dalu3f748" path="res://Sprites/wolf_girl.png" id="2_wmyx3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kepnr"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_wmyx3")
+metallic = 0.27
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_07526"]
+material = SubResource("StandardMaterial3D_kepnr")
+size = Vector2(1, 1.5)
+orientation = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cy8cd"]
+
+[node name="Enemy" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -4)
+script = ExtResource("1_uanfd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.114, 0)
+mesh = SubResource("PlaneMesh_07526")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_cy8cd")
+
+[node name="RayFront" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -2.5)
+
+[node name="RayBack" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 2.5)
+
+[node name="RayRight" type="RayCast3D" parent="."]
+target_position = Vector3(2.5, 0, 0)
+
+[node name="RayLeft" type="RayCast3D" parent="."]
+target_position = Vector3(-2.5, 0, 0)

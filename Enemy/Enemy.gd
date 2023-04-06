@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@onready var player : Player = get_parent().get_node("player")
+@onready var player : Player = get_parent().get_node("Player")
 
 @onready var ray_front = $RayFront
 @onready var ray_back = $RayBack
@@ -44,6 +44,8 @@ func look_at_player_smooth(delta):
 	transform.basis = Basis(current_rot.slerp(look_at_rot, delta * ROTATION_SPEED))
 	
 func _physics_process(delta):
+	if not player is Player:
+		return
 	if get_intersect_to_player().is_empty():
 		look_at_player_smooth(delta)
 
@@ -126,5 +128,6 @@ func move_towards_player():
 #			move_forward()
 	
 func _ready():
-	print(player.name)
-	player.acted.connect(move_towards_player)
+	if player is Player:
+		print(player.name)
+		player.acted.connect(move_towards_player)
