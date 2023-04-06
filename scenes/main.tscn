@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh7phi4bayhm7"]
+[gd_scene load_steps=8 format=3 uid="uid://bh7phi4bayhm7"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/player.tscn" id="2_h8jw0"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
+[ext_resource type="Script" path="res://scripts/chest.gd" id="4_32v0m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
@@ -10,7 +11,8 @@ shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.164
 shader_parameter/softness = 0.799
 
-[sub_resource type="BoxMesh" id="BoxMesh_x1itt"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_4fuhf"]
+size = Vector2(1, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hd7j2"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
@@ -39,10 +41,11 @@ grow_vertical = 2
 
 [node name="chest" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
+script = ExtResource("4_32v0m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="chest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_x1itt")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_4fuhf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="chest"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
