@@ -1,24 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdsewocli8rpy"]
+[gd_scene load_steps=9 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
-[ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/player.tscn" id="2_h8jw0"]
+[ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/Player.tscn" id="2_h8jw0"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
-[ext_resource type="Script" path="res://scripts/chest.gd" id="4_32v0m"]
-[ext_resource type="PackedScene" uid="uid://06tyl2y5ryen" path="res://Enemy/Enemy.tscn" id="5_rbtab"]
+[ext_resource type="PackedScene" uid="uid://dq5nhwx7jmb4p" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
 [ext_resource type="PackedScene" uid="uid://d2ujpa2sybd7d" path="res://Inventory/Inventory.tscn" id="7_w44pu"]
+[ext_resource type="PackedScene" uid="uid://bactju1vjjbfu" path="res://Chest/Chest.tscn" id="8_0hfbb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.164
 shader_parameter/softness = 0.799
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_4fuhf"]
-size = Vector2(1, 1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hd7j2"]
-points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [node name="Node3D" type="Node3D"]
 
@@ -43,21 +37,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="chest" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
-script = ExtResource("4_32v0m")
+[node name="Slime" parent="." instance=ExtResource("5_obdrs")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="chest"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_4fuhf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="chest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("ConvexPolygonShape3D_hd7j2")
-
-[node name="Enemy" parent="." instance=ExtResource("5_rbtab")]
-
-[node name="Enemy2" parent="." instance=ExtResource("6_scurk")]
+[node name="Wolf" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
 
 [node name="UI" type="Control" parent="."]
@@ -77,3 +59,6 @@ offset_left = 400.0
 offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Chest" parent="." instance=ExtResource("8_0hfbb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -6)

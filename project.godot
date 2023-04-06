@@ -20,6 +20,10 @@ config/icon="res://Sprites/icon.svg"
 
 Globals="*res://scripts/Globals.gd"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 W={
