@@ -38,11 +38,12 @@ func rotate_left():
 		[group[0][0], group[1][0]]
 	]
 	group = new_group
-	
-	for tile in tiles:
-		tile.rotate_left()
 
 	update_tiles()
+
+#	for tile in tiles:
+#		tile.rotate_left()
+
 	
 func rotate_right():
 	var new_group = [
@@ -54,17 +55,16 @@ func rotate_right():
 	for tile in tiles:
 		tile.rotate_right()
 
-	update_tiles()
+#	update_tiles() # TODO: not sure what rotation doesnt work
 		
 func update_tiles():
 	# update tiles
 	var tile_counter = 0
 	for row in range(2):
 		for col in range(2):
-			print(group[row][col])
+#			print(group[row][col])
 			tiles[tile_counter].set_item_type(group[row][col])
 			tile_counter += 1
-
 
 func _input(event):
 	if event.is_action_pressed("A"):

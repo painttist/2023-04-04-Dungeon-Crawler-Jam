@@ -11,7 +11,7 @@ const tiles = [
 ]
 
 var sprite_dict = {
-	ARROW: preload("res://Sprites/sword.png"),
+	ARROW: preload("res://Sprites/arrow_up.png"),
 	SWORD: preload("res://Sprites/sword.png"),
 }
 
