@@ -1,11 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://clcywk6tytxq7"]
 
-[ext_resource type="Texture2D" uid="uid://cwdo64ylusvjf" path="res://Sprites/sword.png" id="1_tujvy"]
 [ext_resource type="Script" path="res://Tile.gd" id="2_gnevd"]
+[ext_resource type="Texture2D" uid="uid://cbaikqtj8f2j5" path="res://Sprites/arrow_up.png" id="2_m0qlt"]
 
-[node name="Tile" type="TextureRect"]
+[node name="Tile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 100.0
 offset_bottom = 100.0
 pivot_offset = Vector2(50, 50)
-texture = ExtResource("1_tujvy")
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_gnevd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m0qlt")

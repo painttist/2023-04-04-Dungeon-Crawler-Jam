@@ -23,7 +23,7 @@ func _ready():
 			slot.slot_id = slot_count
 			inventory_slots[slot_count / 3][slot_count % 3] = slot
 			slot_count += 1
-			
+				
 #	# check inventory init
 #	print("check inventory init")
 #	for row in range(2):
@@ -31,10 +31,23 @@ func _ready():
 #			print(inventory[row][col])
 
 func check_availble_for_place(slot_id: int, tile_group: TileGroup) -> bool:
-	print("check")
-	
-	return true
+	print(slot_id, " ",tile_group)
+	if slot_id == 0 or slot_id == 1:
+		return true
+	elif slot_id == 2:
+		return tile_group.group[0][1] == null and tile_group.group[1][1] == null
+	elif slot_id == 3 or slot_id == 4:
+		return tile_group.group[1][0] == null and tile_group.group[1][1] == null
+	else:
+		return false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func handle_drop_placement(slot_id: int, tile_group: TileGroup):
+	var slot_row = slot_id / 3
+	var slot_col = slot_id % 3
+	for row in range(2):
+		for col in range(2):
+			var tile_type = tile_group.group[row][col]
+			if tile_type != null:
+				var slot: InventorySlot = inventory_slots[slot_row + row][slot_col + col]
+				slot.tile.set_item_type(tile_type)
+			# TODO: Update rotation

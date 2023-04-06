@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://clcywk6tytxq7" path="res://Tile.tscn" id="2_wvmci"]
 
 [node name="TileGroup" type="GridContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 198.0
+offset_bottom = 201.0
 columns = 2
 script = ExtResource("2_88viw")
 
@@ -20,3 +22,5 @@ layout_mode = 2
 
 [node name="Tile4" parent="." instance=ExtResource("2_wvmci")]
 layout_mode = 2
+
+[connection signal="gui_input" from="." to="." method="on_tile_group_drag"]

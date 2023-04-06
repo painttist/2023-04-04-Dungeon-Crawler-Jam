@@ -24,7 +24,7 @@ offset_right = 570.0
 offset_bottom = 471.0
 
 [node name="TileGroup" parent="." instance=ExtResource("2_gth2a")]
-offset_left = 506.0
-offset_top = 124.0
-offset_right = 606.0
-offset_bottom = 224.0
+offset_left = 458.0
+offset_top = 146.0
+offset_right = 558.0
+offset_bottom = 246.0
