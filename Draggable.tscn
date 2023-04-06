@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct3r82718w55y"]
+
+[ext_resource type="Texture2D" uid="uid://bitjffsxlw7hv" path="res://Sprites/slot_bg.png" id="1_g27s4"]
+[ext_resource type="Script" path="res://Draggable.gd" id="2_00he6"]
+
+[node name="Draggable" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_g27s4")
+script = ExtResource("2_00he6")
