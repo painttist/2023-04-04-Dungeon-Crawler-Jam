@@ -13,8 +13,12 @@ config_version=5
 config/name="Dungeon Crawler Duoality"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/icon.svg"
 <<<<<<<Updatedupstreamrun/main_scene="res://scenes/main.tscn"
+
+[autoload]
+
+Globals="*res://scripts/Globals.gd"
 
 [input]
 

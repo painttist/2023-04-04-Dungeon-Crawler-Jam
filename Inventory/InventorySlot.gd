@@ -3,6 +3,7 @@ extends TextureRect
 class_name InventorySlot
 
 var inventory: Inventory
+var slot_id
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +17,7 @@ func _process(delta):
 
 func _can_drop_data(at_position, data) -> bool:
 #	print("can drop data")
-	return inventory.check_availble_for_place()
+	return inventory.check_availble_for_place(slot_id, null)
 
 func _drop_data(at_position, data):
 	print("drop data")

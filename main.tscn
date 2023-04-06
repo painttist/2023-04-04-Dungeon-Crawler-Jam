@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6y1hy2gt8kts"]
 
-[ext_resource type="PackedScene" uid="uid://d2ujpa2sybd7d" path="res://Inventory.tscn" id="1_36q1x"]
-[ext_resource type="PackedScene" uid="uid://ct3r82718w55y" path="res://Draggable.tscn" id="2_nbn8j"]
+[ext_resource type="PackedScene" uid="uid://d2ujpa2sybd7d" path="res://Inventory/Inventory.tscn" id="1_36q1x"]
+[ext_resource type="PackedScene" uid="uid://da4aok56pfgc3" path="res://Inventory/TileGroup.tscn" id="2_gth2a"]
 
 [node name="World" type="Node3D"]
 
@@ -16,15 +16,15 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="Draggable" parent="UI" instance=ExtResource("2_nbn8j")]
-offset_left = 525.0
-offset_top = 121.0
-offset_right = 625.0
-offset_bottom = 221.0
-
 [node name="Inventory" parent="UI" instance=ExtResource("1_36q1x")]
 layout_mode = 0
 offset_left = 570.0
 offset_top = 471.0
 offset_right = 570.0
 offset_bottom = 471.0
+
+[node name="TileGroup" parent="." instance=ExtResource("2_gth2a")]
+offset_left = 506.0
+offset_top = 124.0
+offset_right = 606.0
+offset_bottom = 224.0

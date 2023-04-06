@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://clcywk6tytxq7"]
+
+[ext_resource type="Texture2D" uid="uid://cwdo64ylusvjf" path="res://Sprites/sword.png" id="1_tujvy"]
+[ext_resource type="Script" path="res://Tile.gd" id="2_gnevd"]
+
+[node name="Tile" type="TextureRect"]
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("1_tujvy")
+script = ExtResource("2_gnevd")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://da4aok56pfgc3"]
+
+[ext_resource type="Script" path="res://Inventory/TileGroup.gd" id="2_88viw"]
+[ext_resource type="PackedScene" uid="uid://clcywk6tytxq7" path="res://Tile.tscn" id="2_wvmci"]
+
+[node name="TileGroup" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+script = ExtResource("2_88viw")
+
+[node name="Tile" parent="." instance=ExtResource("2_wvmci")]
+layout_mode = 2
+
+[node name="Tile2" parent="." instance=ExtResource("2_wvmci")]
+layout_mode = 2
+
+[node name="Tile3" parent="." instance=ExtResource("2_wvmci")]
+layout_mode = 2
+
+[node name="Tile4" parent="." instance=ExtResource("2_wvmci")]
+layout_mode = 2
