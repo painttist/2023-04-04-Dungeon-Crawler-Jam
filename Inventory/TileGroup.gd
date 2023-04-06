@@ -23,9 +23,10 @@ func init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
-	add_to_group("Loot")
+#	add_to_group("Loot")
 
 func _process(delta):
+#	print(get_viewport().get_mouse_position())
 	if is_dragging:
 		position = get_viewport().get_mouse_position() - drag_offset
 
@@ -87,16 +88,20 @@ func _input(event):
 #	return self
 	
 func on_tile_group_drag(event: InputEvent):
+#	print(event.as_text())
+	print(event)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		# init dragging
 		if !is_dragging and is_valid_position(event.position):
 			is_dragging = true
 			# event.position is dragging offset
 			drag_offset = event.position
-			original_pos = self.global_position
+			original_pos = self.global_position 
 
 
 func is_valid_position(pos: Vector2) -> bool:
+#	print(pos)
 	var row = int(pos.y) / 100	# HardCode: size of one tile
 	var col = int(pos.x) / 100
 	return group[row][col] != null
+

@@ -4,10 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://clcywk6tytxq7" path="res://Tile.tscn" id="2_wvmci"]
 
 [node name="TileGroup" type="GridContainer"]
-offset_left = -2.0
-offset_top = 1.0
-offset_right = 198.0
-offset_bottom = 201.0
+offset_right = 200.0
+offset_bottom = 200.0
 columns = 2
 script = ExtResource("2_88viw")
 
