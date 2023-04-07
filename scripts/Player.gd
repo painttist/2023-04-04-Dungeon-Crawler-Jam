@@ -13,6 +13,11 @@ const TWEEN_DURATION = 0.3
 
 @onready var ui = $SkillUI
 
+@onready var audio = $AudioStreamPlayer3D
+
+@onready var sfx_player_attack = preload("res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav")
+@onready var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
+
 var is_picking_skills = false
 
 var tween
@@ -21,12 +26,17 @@ var health = 10
 
 signal acted
 
+func play_walk_audio():
+	audio.stream = sfx_player_walk
+	audio.play()	
+
 func move_forward() -> void:
 	if not ray_front.is_colliding():
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.FORWARD * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_bob")
+		play_walk_audio()
 	else:
 		animation.play("head_bob")
 #		print_debug("touching ", ray_front.get_collider().name)
@@ -37,6 +47,7 @@ func move_back() -> void:
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.BACK * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_bob")
+		play_walk_audio()
 	else:
 		animation.play("head_bob")
 
@@ -46,6 +57,7 @@ func move_left() -> void:
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.LEFT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_left")
+		play_walk_audio()
 	else:
 		animation.play("head_bob")
 
@@ -55,6 +67,7 @@ func move_right() -> void:
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.RIGHT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_right")
+		play_walk_audio()
 	else:
 		animation.play("head_bob")
 
@@ -70,9 +83,12 @@ func attack() -> void:
 	if ray_front.is_colliding():
 		var col = ray_front.get_collider()
 		if col.has_method("take_damage"):
-			animation.play("attack")
-			await animation.animation_finished
-			col.take_damage(self, 2)
+			if col.health > 0:
+				audio.stream = sfx_player_attack
+				audio.play()
+				animation.play("attack")
+				await animation.animation_finished
+				col.take_damage(self, 2)
 	acted.emit()
 
 func take_damage(amount):

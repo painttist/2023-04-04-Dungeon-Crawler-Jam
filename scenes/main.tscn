@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=11 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
 [ext_resource type="Texture2D" uid="uid://83ms41eytn3n" path="res://Sprites/icon.svg" id="3_c37im"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
-[ext_resource type="PackedScene" uid="uid://dq5nhwx7jmb4p" path="res://Enemy/Slime.tscn" id="5_obdrs"]
+[ext_resource type="PackedScene" uid="uid://it8fxyv3dr1e" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
 [ext_resource type="PackedScene" uid="uid://d2ujpa2sybd7d" path="res://Inventory/Inventory.tscn" id="7_w44pu"]
 [ext_resource type="PackedScene" uid="uid://bactju1vjjbfu" path="res://Chest/Chest.tscn" id="8_0hfbb"]
+[ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
@@ -58,6 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -2)
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,3 +79,7 @@ grow_vertical = 0
 
 [node name="Chest" parent="." instance=ExtResource("8_0hfbb")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -6)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_t2ldl")
+autoplay = true

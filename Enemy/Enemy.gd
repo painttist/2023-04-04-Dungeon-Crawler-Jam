@@ -7,6 +7,13 @@ class_name Enemy
 @onready var level : GridMap = get_parent().get_node("level")
 
 @onready var animation = $AnimationPlayer
+@onready var audio = $AudioStreamPlayer3D
+
+var sfx_slime_jump = preload("res://Audio/slime_jump.mp3")
+var sfx_slime_attack = preload("res://Audio/slime_attack.wav")
+
+var sfx_wolf_walk = preload("res://Audio/WHOOSH_Air_Super_Fast_RR5_mono.wav")
+var sfx_wolf_attack = preload("res://Audio/WHOOSH_Air_Super_Fast_RR4_mono.wav")
 
 enum ENEMY_TYPE {
 	SLIME,
@@ -99,8 +106,12 @@ func move_towards_player():
 			await animation.animation_finished
 		match type:
 			self.ENEMY_TYPE.SLIME:
+				audio.stream = sfx_slime_attack
+				audio.play()
 				animation.play("attack")
 			self.ENEMY_TYPE.WOLF:
+				audio.stream = sfx_wolf_attack
+				audio.play()
 				animation.play("attack_strike")
 		await animation.animation_finished
 		player.take_damage(2)
@@ -142,7 +153,20 @@ func move_towards_player():
 		move_back()
 #		move_forward()
 	if (moving):
-		print(self.name, " Moving")
+		print(self.name, " Moving") 
+		if (audio is AudioStreamPlayer3D):
+			match type:
+				self.ENEMY_TYPE.SLIME:
+					audio.stream = sfx_slime_jump
+					audio.play()
+				self.ENEMY_TYPE.WOLF:
+					audio.stream = sfx_wolf_walk
+					audio.volume_db = -8
+					audio.max_db = -2
+					audio.play()
+					await audio.finished
+					audio.volume_db = 0
+					audio.max_db = 3
 		await tween.finished
 		print(self.name, " Finished Moving")
 #	print("dir: ", dir)

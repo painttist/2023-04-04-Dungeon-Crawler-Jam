@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq5nhwx7jmb4p"]
+[gd_scene load_steps=13 format=3 uid="uid://it8fxyv3dr1e"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_qhukh"]
 [ext_resource type="Texture2D" uid="uid://dcrm7uq2ijiow" path="res://Sprites/slime_girl.png" id="2_6yuul"]
+[ext_resource type="AudioStream" uid="uid://dgbyvwxbgfkx0" path="res://Audio/slime_attack.wav" id="3_q33c5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kepnr"]
 transparency = 2
@@ -196,3 +197,6 @@ shape = SubResource("CylinderShape3D_mm1oy")
 libraries = {
 "": SubResource("AnimationLibrary_f3rsk")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_q33c5")
