@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=12 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://it8fxyv3dr1e" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
 [ext_resource type="PackedScene" uid="uid://bactju1vjjbfu" path="res://Chest/Chest.tscn" id="8_0hfbb"]
+[ext_resource type="Texture2D" uid="uid://tlv4yv1xjv85" path="res://Sprites/heart_icon.png" id="9_6lejp"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="9_jmyin"]
 [ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
@@ -16,6 +18,17 @@ shader_parameter/multiplier = -0.869
 shader_parameter/softness = 1.403
 
 [node name="Node3D" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0gqbr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="parent" type="Node3D" parent="."]
 
@@ -35,17 +48,6 @@ position = Vector2(508, 273)
 texture = ExtResource("3_c37im")
 
 [node name="ColorRect" type="ColorRect" parent="Player/SkillUI"]
-material = SubResource("ShaderMaterial_0gqbr")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_0gqbr")
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +95,7 @@ transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 14, 0,
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 20, 0, -6)
 
 [node name="Chest3" parent="." instance=ExtResource("8_0hfbb")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 41.9986, 0, 13.957)
+transform = Transform3D(1.583, 0, 2.76781e-07, 0, 1.583, 0, -2.76781e-07, 0, 1.583, 41.9986, 0, 13.957)
 
 [node name="Chest4" parent="." instance=ExtResource("8_0hfbb")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 20, 0, 4)
@@ -107,3 +109,61 @@ transform = Transform3D(-0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, -0.5, 26, 0, 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_t2ldl")
 autoplay = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="HealthBar" type="Node2D" parent="CanvasLayer2"]
+script = ExtResource("9_jmyin")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasLayer2/HealthBar"]
+position = Vector2(66, 66)
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("9_6lejp")
+
+[connection signal="health_changed" from="Player" to="CanvasLayer2/HealthBar" method="_on_player_health_changed"]

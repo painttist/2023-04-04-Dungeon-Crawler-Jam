@@ -27,6 +27,8 @@ var health = 10
 
 signal acted
 
+signal health_changed
+
 func play_walk_audio():
 	audio.stream = sfx_player_walk
 	audio.play()	
@@ -94,8 +96,12 @@ func attack() -> void:
 
 func take_damage(amount):
 	health -= amount
+	health_changed.emit(health)
 	animation.play("take_damage") # special animation that has 0.3s for receiving attack anim and 0.3s for hit anim
 	print("Player health: ", health)
+	if health <= 0:
+		await animation.animation_finished
+		get_tree().reload_current_scene()
 
 func get_reward():
 	audio.stream = sfx_reward
