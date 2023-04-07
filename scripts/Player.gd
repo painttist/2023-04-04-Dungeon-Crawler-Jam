@@ -149,3 +149,6 @@ func _physics_process(_delta):
 	elif Input.is_action_pressed("D"):
 		move_right()
 	
+#func handle_behaviour(behaviour: int):
+#	match behaviour:
+#

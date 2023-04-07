@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://da4aok56pfgc3"]
 
 [ext_resource type="Script" path="res://Inventory/TileGroup.gd" id="2_88viw"]
-[ext_resource type="PackedScene" uid="uid://clcywk6tytxq7" path="res://Tile.tscn" id="2_wvmci"]
+[ext_resource type="PackedScene" uid="uid://ow8ysal0ewvf" path="res://Inventory/Tile.tscn" id="2_tbbiq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctkyy"]
 size = Vector2(200, 200)
@@ -9,18 +9,18 @@ size = Vector2(200, 200)
 [node name="TileGroup" type="Area2D"]
 script = ExtResource("2_88viw")
 
-[node name="Tile" parent="." instance=ExtResource("2_wvmci")]
-position = Vector2(50, 50)
-
-[node name="Tile2" parent="." instance=ExtResource("2_wvmci")]
-position = Vector2(150, 50)
-
-[node name="Tile3" parent="." instance=ExtResource("2_wvmci")]
-position = Vector2(50, 150)
-
-[node name="Tile4" parent="." instance=ExtResource("2_wvmci")]
-position = Vector2(150, 150)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(100, 100)
 shape = SubResource("RectangleShape2D_ctkyy")
+
+[node name="Tile" parent="." instance=ExtResource("2_tbbiq")]
+position = Vector2(50, 50)
+
+[node name="Tile2" parent="." instance=ExtResource("2_tbbiq")]
+position = Vector2(150, 50)
+
+[node name="Tile3" parent="." instance=ExtResource("2_tbbiq")]
+position = Vector2(50, 150)
+
+[node name="Tile4" parent="." instance=ExtResource("2_tbbiq")]
+position = Vector2(150, 150)

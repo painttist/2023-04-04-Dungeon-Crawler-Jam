@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2ujpa2sybd7d"]
+[gd_scene load_steps=4 format=3 uid="uid://2yp2uoa0xbgu"]
 
 [ext_resource type="Script" path="res://Inventory/Inventory.gd" id="1_jle0k"]
 [ext_resource type="PackedScene" uid="uid://dookavn8tuqex" path="res://Inventory/InventorySlot.tscn" id="2_58731"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqvb6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5cih"]
 size = Vector2(300, 200)
 
 [node name="Inventory" type="Area2D"]
 script = ExtResource("1_jle0k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(150, 100)
+shape = SubResource("RectangleShape2D_d5cih")
 
 [node name="Slot" parent="." instance=ExtResource("2_58731")]
 
@@ -25,7 +29,3 @@ position = Vector2(100, 100)
 
 [node name="Slot6" parent="." instance=ExtResource("2_58731")]
 position = Vector2(200, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(150, 100)
-shape = SubResource("RectangleShape2D_vqvb6")

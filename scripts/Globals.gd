@@ -4,18 +4,48 @@ extends Node
 var is_mouse_inside_inventory: bool = false
 
 enum {
+#	NONE, # use null instead
 	ARROW,
-	SWORD,
+	SWORD_UP,
+	SWORD_DOWN,
+	KNIFE,
+	WAND_UP,
+	WAND_DOWN,
+	POTION,
+	SHIELD,
+	KEY
 }
 
 const tiles = [
-	[[SWORD, SWORD], [ARROW, null]],
-	[[ARROW, ARROW], [null, null]]
+	[[SWORD_UP, ARROW], [SWORD_DOWN, null]],
+	[[ARROW, ARROW], [null, null]],
+	[[WAND_UP, null], [WAND_DOWN, null]],
 ]
+
+# behaviours
+enum {
+	MOVE_FORWARD,
+	MOVE_BACK,
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	TURN_LEFT,
+	TURN_RIGHT,
+	ATTACK_KNIFE,
+	ATTACK_WAND,
+	ATTACK_SWORD,
+	ATTACK_BROKEN_SWORD,
+	ATTACK_BROKEN_WAND,
+	DRINK_POTION,
+	DEFEND_SHIELD,
+	USE_KEY
+}
 
 var sprite_dict = {
 	ARROW: preload("res://Sprites/arrow_up.png"),
-	SWORD: preload("res://Sprites/sword.png"),
+	SWORD_UP: preload("res://Sprites/sword_up.png"),
+	SWORD_DOWN: preload("res://Sprites/sword_down.png"),
+	WAND_UP: preload("res://Sprites/wand_up.png"),
+	WAND_DOWN: preload("res://Sprites/wand_down.png")
 }
 
 func get_rand_tile_set():

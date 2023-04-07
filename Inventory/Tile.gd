@@ -4,7 +4,7 @@ class_name Tile
 
 @onready var texture_rect = $TextureRect
 
-var item_type = Globals.SWORD: set = set_item_type
+var item_type = Globals.SWORD_UP: set = set_item_type
 
 func set_item_type(new_value):
 	item_type = new_value

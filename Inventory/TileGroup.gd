@@ -2,6 +2,7 @@ extends Area2D
 
 class_name TileGroup
 
+
 var group = [
 	[null, null],
 	[null, null]

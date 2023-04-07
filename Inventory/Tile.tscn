@@ -6,10 +6,5 @@
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_64u75")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureRect" type="Sprite2D" parent="."]
 texture = ExtResource("2_rcs2p")

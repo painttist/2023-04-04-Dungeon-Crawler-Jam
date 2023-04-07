@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=14 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://tlv4yv1xjv85" path="res://Sprites/heart_icon.png" id="9_6lejp"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="9_jmyin"]
 [ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
+[ext_resource type="PackedScene" uid="uid://2yp2uoa0xbgu" path="res://Inventory/Inventory.tscn" id="11_gi2sm"]
+[ext_resource type="PackedScene" uid="uid://da4aok56pfgc3" path="res://Inventory/TileGroup.tscn" id="12_nqgqt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
@@ -166,4 +168,11 @@ position = Vector2(66, 66)
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("9_6lejp")
 
+[node name="Inventory" parent="." instance=ExtResource("11_gi2sm")]
+position = Vector2(69, 410)
+
+[node name="TileGroup" parent="." instance=ExtResource("12_nqgqt")]
+position = Vector2(678, 123)
+
 [connection signal="health_changed" from="Player" to="CanvasLayer2/HealthBar" method="_on_player_health_changed"]
+[connection signal="drop_area_clicked" from="Inventory" to="TileGroup" method="_on_inventory_drop_area_clicked"]
