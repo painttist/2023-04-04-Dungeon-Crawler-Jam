@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bactju1vjjbfu"]
+[gd_scene load_steps=17 format=3 uid="uid://bactju1vjjbfu"]
 
 [ext_resource type="Script" path="res://Chest/Chest.gd" id="1_wj7n2"]
 [ext_resource type="Texture2D" uid="uid://c7j08j1pcsfkp" path="res://models/chest_TexturesCom_Wood_Planks1_2x2_512_albedo.png" id="2_eoeh8"]
 [ext_resource type="Texture2D" uid="uid://bo0i20iufqvke" path="res://models/chest_TexturesCom_Wood_Planks1_2x2_512_normal.png" id="3_l5svp"]
+[ext_resource type="AudioStream" uid="uid://ctow7nanlxj4d" path="res://Audio/CREAK_Wood_Hollow_Deep_mono.wav" id="4_t57l7"]
+[ext_resource type="AudioStream" uid="uid://di4njihk5y7i6" path="res://Audio/IMPACT_Wood_Plank_On_Wood_Pile_11_mono.wav" id="5_0x5wr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4eo4"]
 size = Vector3(1.28555, 1.5241, 0.672542)
@@ -122,6 +124,85 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7nl4l")
 
+[sub_resource type="Animation" id="Animation_elia0"]
+resource_name = "chest_open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/chest2/lid:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.228138, 0.3),
+"transitions": PackedFloat32Array(1.68179, 1, 2.92818),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.81536, 0, 0), Vector3(1.89368, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s7pdi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/chest2/lid:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_stb6k"]
+resource_name = "take_damage"
+length = 0.3
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.15), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/chest2/lid:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.158825, 0, 0), Vector3(0.195477, 0, 0), Vector3(0.158825, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_floy3"]
+_data = {
+"RESET": SubResource("Animation_s7pdi"),
+"chest_open": SubResource("Animation_elia0"),
+"take_damage": SubResource("Animation_stb6k")
+}
+
 [node name="Chest" type="StaticBody3D"]
 script = ExtResource("1_wj7n2")
 
@@ -141,3 +222,17 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515, 0.2646)
 mesh = SubResource("ArrayMesh_keoly")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26408, -0.0516939)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_floy3")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_t57l7")
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_0x5wr")

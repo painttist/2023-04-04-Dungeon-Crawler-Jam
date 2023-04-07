@@ -62,7 +62,7 @@ func _physics_process(delta):
 	if get_intersect_to_player().is_empty():
 		look_at_player_smooth(delta)
 
-var health = 6
+var health = 2
 
 func take_damage(attacker, damage):
 	health -= damage
