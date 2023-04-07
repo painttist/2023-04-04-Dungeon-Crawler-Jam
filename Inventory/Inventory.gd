@@ -58,4 +58,4 @@ func handle_drop_placement(slot_id: int, tile_group: TileGroup):
 			if tile_type != null:
 				var slot: InventorySlot = inventory_slots[slot_row + row][slot_col + col]
 				slot.tile.set_item_type(tile_type)
-				slot.tile.set_rotation_degrees(tile.rotation_degrees)
+				slot.tile.set_item_rotation(tile.item_rotation)

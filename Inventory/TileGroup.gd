@@ -24,7 +24,7 @@ func init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
-	add_to_group("Loot")
+#	add_to_group("Loot")
 
 func rotate_left():
 	var new_group = [
