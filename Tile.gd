@@ -27,3 +27,4 @@ func rotate_left():
 
 func rotate_right():
 	rotation_degrees += 90
+

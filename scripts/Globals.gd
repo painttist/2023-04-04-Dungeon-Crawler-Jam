@@ -1,5 +1,8 @@
 extends Node
 
+
+var is_mouse_inside_inventory: bool = false
+
 enum {
 	ARROW,
 	SWORD,

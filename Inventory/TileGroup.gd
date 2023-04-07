@@ -8,9 +8,10 @@ var group = [
 ]
 
 var tiles: Array[Tile]
-var is_dragging: bool = false
-var drag_offset: Vector2
-var original_pos: Vector2
+#var is_dragging: bool = false
+#var drag_offset: Vector2
+#var original_pos: Vector2
+const drag_preview = preload("res://Inventory/TileGroupPreview.tscn")
 
 func init():
 	var children = get_children()
@@ -23,12 +24,12 @@ func init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
-#	add_to_group("Loot")
+	add_to_group("Loot")
 
-func _process(delta):
-#	print(get_viewport().get_mouse_position())
-	if is_dragging:
-		position = get_viewport().get_mouse_position() - drag_offset
+#func _process(delta):
+##	print(get_viewport().get_mouse_position())
+#	if is_dragging:
+#		position = get_viewport().get_mouse_position() - drag_offset
 
 func rotate_left():
 	var new_group = [
@@ -80,28 +81,38 @@ func _input(event):
 	elif event.is_action_pressed("D"):
 		rotate_right()
 	
-#func _get_drag_data(at_position: Vector2): 
-#	print("get drag data: ", at_position)
-#	var preview = TextureRect.new()
-#	preview.texture = preload("res://Sprites/sword.png")
-#	set_drag_preview(preview)
-#	return self
+func _get_drag_data(at_position: Vector2): 
+	print("get drag data: ", at_position)
+	if is_valid_position(at_position):
+		var preview = drag_preview.instantiate()
+		preview.drag_offset = at_position
+		get_tree().get_root().get_node("World/UI").add_child(preview) # Hardcode
+#		set_drag_preview(preview) # Built-in preview is bad
+		return self
 	
-func on_tile_group_drag(event: InputEvent):
-#	print(event.as_text())
-	print(event)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		# init dragging
-		if !is_dragging and is_valid_position(event.position):
-			is_dragging = true
-			# event.position is dragging offset
-			drag_offset = event.position
-			original_pos = self.global_position 
-
+#func on_tile_group_drag(event: InputEvent):
+##	print(event)
+#	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+#		# init dragging
+#		if !is_dragging and is_valid_position(event.position):
+#			is_dragging = true
+#			# event.position is dragging offset
+#			drag_offset = event.position
+#			original_pos = self.global_position 
+#		elif is_dragging:
+#			is_dragging = false
+#			if is_hitting_inventory(event.position):
+#				print("release")
+#			else:
+#				position = original_pos # add animation
+#				print("place back")
+		
 
 func is_valid_position(pos: Vector2) -> bool:
 #	print(pos)
 	var row = int(pos.y) / 100	# HardCode: size of one tile
 	var col = int(pos.x) / 100
 	return group[row][col] != null
-
+#
+#func is_hitting_inventory(pos: Vector2) -> bool:
+#	return Globals.is_mouse_inside_inventory

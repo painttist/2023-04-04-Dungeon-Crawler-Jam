@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://0n4vqoy5pxd8"]
+
+[ext_resource type="Script" path="res://Inventory/TileGroupPreview.gd" id="1_7rawo"]
+[ext_resource type="Texture2D" uid="uid://cwdo64ylusvjf" path="res://Sprites/sword.png" id="2_70wus"]
+
+[node name="TileGroupPreview" type="Node2D"]
+script = ExtResource("1_7rawo")
+
+[node name="TilePreview" type="Sprite2D" parent="."]
+texture = ExtResource("2_70wus")
+
+[node name="TilePreview2" type="Sprite2D" parent="."]
+texture = ExtResource("2_70wus")
+offset = Vector2(100, 0)
+
+[node name="TilePreview3" type="Sprite2D" parent="."]
+texture = ExtResource("2_70wus")
+offset = Vector2(0, 100)
+
+[node name="TilePreview4" type="Sprite2D" parent="."]
+texture = ExtResource("2_70wus")
+offset = Vector2(100, 100)

@@ -1,4 +1,4 @@
-extends TextureRect
+extends Control
 
 class_name InventorySlot
 
@@ -14,9 +14,6 @@ func _ready():
 			tile = child
 			break
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _can_drop_data(at_position, data) -> bool:
 #	print("can drop data")
@@ -25,3 +22,8 @@ func _can_drop_data(at_position, data) -> bool:
 func _drop_data(at_position, data):
 #	print("drop data")
 	inventory.handle_drop_placement(slot_id, data)
+#
+#func on_tile_mouse_release(event):
+#	if Input.is_action_just_released("Click"):
+#		print("release")
+

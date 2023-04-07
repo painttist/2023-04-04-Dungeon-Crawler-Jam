@@ -20,5 +20,3 @@ layout_mode = 2
 
 [node name="Tile4" parent="." instance=ExtResource("2_wvmci")]
 layout_mode = 2
-
-[connection signal="gui_input" from="." to="." method="on_tile_group_drag"]

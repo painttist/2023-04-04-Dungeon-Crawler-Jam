@@ -5,23 +5,16 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4oco"]
 
-[node name="Inventory" type="Panel"]
+[node name="Inventory" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 200)
+offset_right = 300.0
+offset_bottom = 200.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_h4oco")
 script = ExtResource("1_jle0k")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -154.0
-offset_top = -102.0
-offset_right = 154.0
-offset_bottom = 102.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 columns = 3
 
 [node name="Slot" parent="GridContainer" instance=ExtResource("2_58731")]
