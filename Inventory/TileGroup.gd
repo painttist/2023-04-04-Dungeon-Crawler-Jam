@@ -83,53 +83,45 @@ func _process(delta):
 		self.position = mouse_pos - drag_offset
 	
 func _input_event(viewport, event, shape_idx):
-	print("global pos:", event.position)
+#	print("global pos:", event.position, "\tself position", self.transform.origin)
 	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
 		var local_pos = event.position - self.transform.origin
-		print("local_pos", local_pos, ", ", shape_idx)
+#		print("local_pos", local_pos, ", ", shape_idx)
 		# init dragging
 		if !is_dragging and is_valid_position(local_pos):
+			print("start drag")
 			is_dragging = true
 			# event.position is dragging offset
 			drag_offset = local_pos
 			original_pos = self.global_position 
-#			self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			self.input_pickable = false
 		elif is_dragging:
 			print("return animation")
 			is_dragging = false
 			position = original_pos	# TODO: animation
+			self.input_pickable = true
 
 func is_valid_position(pos: Vector2) -> bool:
-#	print(pos)
-	var row = int(pos.x) / 100	# HardCode: size of one tile
-	var col = int(pos.y) / 100
-	return group[col][row] != null
+	print("check valid position", pos)
+	var row = int(pos.y) / 100	# HardCode: size of one tile
+	var col = int(pos.x) / 100
+	return group[row][col] != null
 
 func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vector2):
 #	print("drop, event_position: ", event_position)
-
-	var inventory_local_pos = event_position - inventory.transform.origin
-	
-	var slot_row = int(inventory_local_pos.x) / 100 - int(drag_offset.x) / 100
-	var slot_col = int(inventory_local_pos.y) / 100 - int(drag_offset.y) / 100
-	var slot_id = slot_col * 3 + slot_row
-	if inventory.check_availble_for_place(slot_id, self):
-		print("drop")
-		inventory.handle_drop_placement(slot_id, self)
+	if is_dragging:
 		is_dragging = false
-#		position = original_pos
-	
-#	if is_dragging:
-#		is_dragging = false
-#		var slot_row = int(event_position.x) / 100 - int(drag_offset.x) / 100
-#		var slot_col = int(event_position.y) / 100 - int(drag_offset.y) / 100
-#		var slot_id = slot_col * 3 + slot_row
-#		if inventory.check_availble_for_place(slot_id, self):
-#			print("drop")
-#			inventory.handle_drop_placement(slot_id, self)
-#			is_dragging = false
-#			position = original_pos
-#		else:
-#			print("return by drop")
-#			is_dragging = false
-#			position = original_pos
+		var slot_col = int(event_position.x) / 100 - int(drag_offset.x) / 100
+		var slot_row = int(event_position.y) / 100 - int(drag_offset.y) / 100
+		var slot_id = slot_row * 3 + slot_col
+		if inventory.check_availble_for_place(slot_id, self):
+			print("drop")
+			inventory.handle_drop_placement(slot_id, self)
+			position = original_pos
+			self.input_pickable = true
+		else:
+			print("return by drop")
+			position = original_pos
+			drag_offset = Vector2.ZERO
+			self.input_pickable = true
+

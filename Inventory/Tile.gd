@@ -5,7 +5,6 @@ class_name Tile
 @onready var texture_rect = $TextureRect
 
 var item_type = Globals.SWORD: set = set_item_type
-var item_rotation = null
 
 func set_item_type(new_value):
 	item_type = new_value
@@ -26,20 +25,11 @@ func _process(_delta):
 #		rotation_degrees = item_rotation
 
 func rotate_left():
-	if item_rotation == null:
-		item_rotation = 0
-	item_rotation -= 90
-	rotation_degrees = item_rotation
-#	item_rotation = int(item_rotation) % 360
+	rotation_degrees -= 90
 
 func rotate_right():
-	if item_rotation == null:
-		item_rotation = 0
-	item_rotation += 90
-	rotation_degrees = item_rotation
+	rotation_degrees += 90
 #	item_rotation = int(item_rotation) % 360
 	
 func set_item_rotation(degree):
-	if item_rotation == null:
-		item_rotation = 0
-	item_rotation = degree
+	rotation_degrees = degree
