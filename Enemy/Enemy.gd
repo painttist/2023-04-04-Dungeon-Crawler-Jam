@@ -104,6 +104,7 @@ func move_towards_player():
 				animation.play("attack")
 			self.ENEMY_TYPE.WOLF:
 				animation.play("attack_strike")
+		await animation.animation_finished
 		player.take_damage(2)
 		return
 	
