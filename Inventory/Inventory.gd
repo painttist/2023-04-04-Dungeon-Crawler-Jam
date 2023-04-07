@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Area2D
 
 class_name Inventory
 
@@ -10,13 +10,8 @@ var inventory_slots = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var children = get_children()
-	var grid;
-	for child in children:
-		if child is GridContainer:
-			grid = child
-			break
 	
-	var slots = grid.get_children()
+	var slots = get_children()
 	var slot_count = 0
 	for slot in slots:
 		if is_instance_of(slot, InventorySlot):
@@ -32,7 +27,7 @@ func _ready():
 
 signal drop_area_clicked
 
-func _gui_input(event):
+func _input_event(viewport, event, shape_idx):
 #	print("Inventory Gui Input")
 	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
 		drop_area_clicked.emit(self, event.position)

@@ -83,13 +83,15 @@ func _process(delta):
 		self.position = mouse_pos - drag_offset
 	
 func _input_event(viewport, event, shape_idx):
-#	print(event)
+	print("global pos:", event.position)
 	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
+		var local_pos = event.position - self.transform.origin
+		print("local_pos", local_pos, ", ", shape_idx)
 		# init dragging
-		if !is_dragging and is_valid_position(event.position):
+		if !is_dragging and is_valid_position(local_pos):
 			is_dragging = true
 			# event.position is dragging offset
-			drag_offset = event.position
+			drag_offset = local_pos
 			original_pos = self.global_position 
 #			self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		elif is_dragging:
@@ -104,17 +106,30 @@ func is_valid_position(pos: Vector2) -> bool:
 	return group[col][row] != null
 
 func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vector2):
-	if is_dragging:
+#	print("drop, event_position: ", event_position)
+
+	var inventory_local_pos = event_position - inventory.transform.origin
+	
+	var slot_row = int(inventory_local_pos.x) / 100 - int(drag_offset.x) / 100
+	var slot_col = int(inventory_local_pos.y) / 100 - int(drag_offset.y) / 100
+	var slot_id = slot_col * 3 + slot_row
+	if inventory.check_availble_for_place(slot_id, self):
+		print("drop")
+		inventory.handle_drop_placement(slot_id, self)
 		is_dragging = false
-		var slot_row = int(event_position.x) / 100 - int(drag_offset.x) / 100
-		var slot_col = int(event_position.y) / 100 - int(drag_offset.y) / 100
-		var slot_id = slot_col * 3 + slot_row
-		if inventory.check_availble_for_place(slot_id, self):
-			print("drop")
-			inventory.handle_drop_placement(slot_id, self)
-			is_dragging = false
-			position = original_pos
-		else:
-			print("return by drop")
-			is_dragging = false
-			position = original_pos
+#		position = original_pos
+	
+#	if is_dragging:
+#		is_dragging = false
+#		var slot_row = int(event_position.x) / 100 - int(drag_offset.x) / 100
+#		var slot_col = int(event_position.y) / 100 - int(drag_offset.y) / 100
+#		var slot_id = slot_col * 3 + slot_row
+#		if inventory.check_availble_for_place(slot_id, self):
+#			print("drop")
+#			inventory.handle_drop_placement(slot_id, self)
+#			is_dragging = false
+#			position = original_pos
+#		else:
+#			print("return by drop")
+#			is_dragging = false
+#			position = original_pos

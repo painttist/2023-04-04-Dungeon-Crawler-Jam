@@ -6,24 +6,9 @@
 [node name="World" type="Node3D"]
 
 [node name="TileGroup" parent="." instance=ExtResource("2_gth2a")]
+position = Vector2(898, 333)
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+[node name="Inventory" parent="." instance=ExtResource("1_36q1x")]
+position = Vector2(500, 400)
 
-[node name="Inventory" parent="UI" instance=ExtResource("1_36q1x")]
-layout_mode = 0
-offset_left = 570.0
-offset_top = 471.0
-offset_right = 570.0
-offset_bottom = 471.0
-
-[connection signal="drop_area_clicked" from="UI/Inventory" to="TileGroup" method="_on_inventory_drop_area_clicked"]
+[connection signal="drop_area_clicked" from="Inventory" to="TileGroup" method="_on_inventory_drop_area_clicked"]

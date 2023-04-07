@@ -3,40 +3,29 @@
 [ext_resource type="Script" path="res://Inventory/Inventory.gd" id="1_jle0k"]
 [ext_resource type="PackedScene" uid="uid://dookavn8tuqex" path="res://Inventory/InventorySlot.tscn" id="2_58731"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4oco"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqvb6"]
+size = Vector2(300, 200)
 
-[node name="Inventory" type="PanelContainer"]
-custom_minimum_size = Vector2(300, 200)
-offset_right = 300.0
-offset_bottom = 200.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_h4oco")
+[node name="Inventory" type="Area2D"]
 script = ExtResource("1_jle0k")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 2
-columns = 3
+[node name="Slot" parent="." instance=ExtResource("2_58731")]
 
-[node name="Slot" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="Slot2" parent="." instance=ExtResource("2_58731")]
+position = Vector2(100, 0)
 
-[node name="Slot2" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="Slot3" parent="." instance=ExtResource("2_58731")]
+position = Vector2(200, 0)
 
-[node name="Slot3" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="Slot4" parent="." instance=ExtResource("2_58731")]
+position = Vector2(0, 100)
 
-[node name="Slot4" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="Slot5" parent="." instance=ExtResource("2_58731")]
+position = Vector2(100, 100)
 
-[node name="Slot5" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="Slot6" parent="." instance=ExtResource("2_58731")]
+position = Vector2(200, 100)
 
-[node name="Slot6" parent="GridContainer" instance=ExtResource("2_58731")]
-layout_mode = 2
-mouse_filter = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(150, 100)
+shape = SubResource("RectangleShape2D_vqvb6")

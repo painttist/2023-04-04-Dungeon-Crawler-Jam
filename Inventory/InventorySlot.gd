@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 class_name InventorySlot
 
@@ -8,7 +8,7 @@ var tile: Tile
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inventory = get_parent().get_parent()
+	inventory = get_parent()
 	for child in get_children():
 		if is_instance_of(child, Tile):
 			tile = child
