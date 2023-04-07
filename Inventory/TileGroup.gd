@@ -7,6 +7,8 @@ var group = [
 	[null, null]
 ]
 
+var follow_cursor = false
+
 var tiles: Array[Tile]
 #var is_dragging: bool = false
 #var drag_offset: Vector2
@@ -80,7 +82,32 @@ func _input(event):
 		rotate_left()
 	elif event.is_action_pressed("D"):
 		rotate_right()
-	
+
+# _input -> _gui_input -> _unhandled_input
+func _gui_input(event: InputEvent):
+	print("Tile Group GUI Input")
+	if event is InputEventMouseButton:
+		if (event.is_action_pressed("LeftMouse")):
+			if is_valid_position(event.position):
+				print("Is valid, can pickup: ", event.position)
+				follow_cursor = true
+				self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+#func _unhandled_input(event):
+#	if event.is_action_pressed("LeftMouse"):
+#		if follow_cursor:
+#			follow_cursor = false
+#			self.mouse_filter = Control.MOUSE_FILTER_PASS
+#			if event is InputEventMouseButton:
+#				print("Stop follow: ", event.position)
+
+
+func _process(delta):
+	if follow_cursor:
+		var mouse_pos = get_global_mouse_position()
+#		print("mouse: ", mouse_pos)
+		self.position = mouse_pos - Vector2(20, 20)
+
 func _get_drag_data(at_position: Vector2): 
 	print("get drag data: ", at_position)
 	if is_valid_position(at_position):
@@ -116,3 +143,10 @@ func is_valid_position(pos: Vector2) -> bool:
 #
 #func is_hitting_inventory(pos: Vector2) -> bool:
 #	return Globals.is_mouse_inside_inventory
+
+
+func _on_inventory_drop_area_clicked():
+	print("drop")
+	if follow_cursor:
+		follow_cursor = false
+		self.mouse_filter = Control.MOUSE_FILTER_PASS

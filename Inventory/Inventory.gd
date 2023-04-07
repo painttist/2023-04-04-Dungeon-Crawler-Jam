@@ -30,6 +30,16 @@ func _ready():
 #		for col in range(3):
 #			print(inventory[row][col])
 
+signal drop_area_clicked
+
+func _gui_input(event):
+	print("Inventory Gui Input")
+	if event.is_action_pressed("LeftMouse"):
+		if event is InputEventMouseButton:
+			print("Trying to dorp ", event.position)
+			drop_area_clicked.emit()
+		
+
 func check_availble_for_place(slot_id: int, tile_group: TileGroup) -> bool:
 	print(slot_id, " ",tile_group)
 	if slot_id == 0 or slot_id == 1:

@@ -19,18 +19,24 @@ columns = 3
 
 [node name="Slot" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Slot2" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Slot3" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Slot4" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Slot5" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Slot6" parent="GridContainer" instance=ExtResource("2_58731")]
 layout_mode = 2
+mouse_filter = 1
