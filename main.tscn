@@ -6,10 +6,6 @@
 [node name="World" type="Node3D"]
 
 [node name="TileGroup" parent="." instance=ExtResource("2_gth2a")]
-offset_left = 442.0
-offset_top = 107.0
-offset_right = 642.0
-offset_bottom = 307.0
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

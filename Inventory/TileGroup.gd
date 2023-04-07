@@ -1,4 +1,4 @@
-extends GridContainer
+extends Area2D
 
 class_name TileGroup
 
@@ -14,6 +14,7 @@ var original_pos: Vector2
 const drag_preview = preload("res://Inventory/TileGroupPreview.tscn")
 
 func init():
+	print("Init Tilegroup")
 	var children = get_children()
 	for child in children:
 		if child is Tile:
@@ -81,7 +82,7 @@ func _process(delta):
 		var mouse_pos = get_global_mouse_position()
 		self.position = mouse_pos - drag_offset
 	
-func _gui_input(event: InputEvent):
+func _input_event(viewport, event, shape_idx):
 #	print(event)
 	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
 		# init dragging
