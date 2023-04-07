@@ -71,7 +71,7 @@ func attack() -> void:
 
 func take_damage(amount):
 	health -= amount
-	animation.play("take_damage")
+	animation.play("take_damage") # special animation that has 0.3s for receiving attack anim and 0.3s for hit anim
 	print("Player health: ", health)
 
 func _physics_process(_delta):
@@ -80,6 +80,18 @@ func _physics_process(_delta):
 			return
 	if animation.is_playing():
 		return
+	
+	if Input.is_action_pressed("Q"):
+		turn_left()
+		return
+	elif Input.is_action_pressed("E"):
+		turn_right()
+		return
+		
+	if not Globals.player_ready():
+		print("Player is not ready")
+		return
+	
 	if Input.is_action_just_pressed("Space"):
 		attack()
 	elif Input.is_action_pressed("W"):
@@ -90,8 +102,4 @@ func _physics_process(_delta):
 		move_left()
 	elif Input.is_action_pressed("D"):
 		move_right()
-	elif Input.is_action_pressed("Q"):
-		turn_left()
-	elif Input.is_action_pressed("E"):
-		turn_right()
 	

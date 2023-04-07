@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://06tyl2y5ryen"]
+[gd_scene load_steps=10 format=3 uid="uid://06tyl2y5ryen"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_i5j56"]
 [ext_resource type="Texture2D" uid="uid://dcrm7uq2ijiow" path="res://Sprites/slime_girl.png" id="2_bb4wm"]
@@ -16,6 +16,25 @@ size = Vector2(1, 1.5)
 orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cy8cd"]
+
+[sub_resource type="Animation" id="Animation_ar4u7"]
+resource_name = "attack"
+length = 0.3
+
+[sub_resource type="Animation" id="Animation_1a4wa"]
+resource_name = "take_damage"
+length = 0.3
+
+[sub_resource type="Animation" id="Animation_uraug"]
+resource_name = "die"
+length = 0.3
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3rsk"]
+_data = {
+"attack": SubResource("Animation_ar4u7"),
+"die": SubResource("Animation_uraug"),
+"take_damage": SubResource("Animation_1a4wa")
+}
 
 [node name="Enemy" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -4)
@@ -40,3 +59,8 @@ target_position = Vector3(2.5, 0, 0)
 
 [node name="RayLeft" type="RayCast3D" parent="."]
 target_position = Vector3(-2.5, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f3rsk")
+}

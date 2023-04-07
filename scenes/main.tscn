@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
-[ext_resource type="PackedScene" uid="uid://ewui18jjcr1r" path="res://scenes/Player.tscn" id="2_h8jw0"]
+[ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
 [ext_resource type="PackedScene" uid="uid://dq5nhwx7jmb4p" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
@@ -41,6 +41,9 @@ grow_vertical = 2
 
 [node name="Wolf" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
+
+[node name="Wolf2" parent="." instance=ExtResource("6_scurk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -2)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

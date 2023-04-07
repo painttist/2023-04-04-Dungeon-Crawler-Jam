@@ -9,6 +9,8 @@ extends StaticBody3D
 
 @onready var level : GridMap = get_parent().get_node("level")
 
+@onready var animation = $AnimationPlayer
+
 const TWEEN_DURATION = 0.3
 const ROTATION_SPEED = 8.0
 
@@ -16,7 +18,7 @@ const MAX_DISTANCE = 6.0
 
 const MIN_MOVE_DISTANCE = 2.2
 
-var tween
+var tween : Tween
 
 func move_forward() -> void:
 	tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -55,11 +57,11 @@ func take_damage(attacker, damage):
 	health -= damage
 #	attacker.move_back()
 	print("enemy health: ", health, " attacked by ", attacker.name)
-	check_death()
-
-func check_death():
 	if health <= 0:
 		self.queue_free()
+		animation.play("die")
+	else:
+		animation.play("take_damage")
 		
 const FLOAT_EPSILON = 0.00001
 
@@ -72,7 +74,18 @@ func get_intersect_to_player() -> Dictionary:
 	params.collision_mask = 1
 	return space_state.intersect_ray(params)
 
+func no_intersect_to_dir(dir: Vector3):
+	var space_state = get_world_3d().get_direct_space_state()
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = self.transform.origin
+	params.to = self.transform.translated(dir * 2.5).origin
+	params.exclude = [self.get_rid()]
+	params.collision_mask = 1
+	return space_state.intersect_ray(params).is_empty()
+
 func move_towards_player():
+	if health <= 0:
+		return
 	var dist = get_dist_to_player()
 	if (dist <= MIN_MOVE_DISTANCE):
 		player.take_damage(2)
@@ -95,19 +108,28 @@ func move_towards_player():
 	
 #	var dir = self.transform.basis.looking_at(player.transform.origin)
 	var dir = self.transform.origin.direction_to(player.transform.origin)
-	if dir.x > FLOAT_EPSILON and cell_r >= 0:
+	var moving = false
+	if dir.x > FLOAT_EPSILON and cell_r >= 0 and no_intersect_to_dir(Vector3.RIGHT):
 #		print("move right")
+		moving = true
 		move_right()
-	elif dir.x < -FLOAT_EPSILON and cell_l >= 0:
+	elif dir.x < -FLOAT_EPSILON and cell_l >= 0 and no_intersect_to_dir(Vector3.LEFT):
 #		print("move left")
+		moving = true
 		move_left()
-	elif dir.z < -FLOAT_EPSILON and cell_f >= 0:
+	elif dir.z < -FLOAT_EPSILON and cell_f >= 0 and no_intersect_to_dir(Vector3.FORWARD):
 #		print("move front")
+		moving = true
 		move_forward()
-	elif dir.z > FLOAT_EPSILON and cell_b >= 0:
+	elif dir.z > FLOAT_EPSILON and cell_b >= 0 and no_intersect_to_dir(Vector3.BACK):
 #		print("move back")
+		moving = true
 		move_back()
 #		move_forward()
+	if (moving):
+		print(self.name, " Moving")
+		await tween.finished
+		print(self.name, " Finished Moving")
 #	print("dir: ", dir)
 #	print("dist: ", dist)
 #	print("basis: ", self.transform.basis)
@@ -126,8 +148,12 @@ func move_towards_player():
 #		else:
 #			print("move foward")
 #			move_forward()
-	
+
+func add_enemy_action():
+	if health > 0:
+		Globals.enemy_add_action(move_towards_player)
+
 func _ready():
 	if player is Player:
 		print(player.name)
-		player.acted.connect(move_towards_player)
+		player.acted.connect(add_enemy_action)
