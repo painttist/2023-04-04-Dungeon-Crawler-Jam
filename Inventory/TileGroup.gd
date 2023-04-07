@@ -7,12 +7,10 @@ var group = [
 	[null, null]
 ]
 
-var follow_cursor = false
-
 var tiles: Array[Tile]
-#var is_dragging: bool = false
-#var drag_offset: Vector2
-#var original_pos: Vector2
+var is_dragging: bool = false
+var drag_offset: Vector2
+var original_pos: Vector2
 const drag_preview = preload("res://Inventory/TileGroupPreview.tscn")
 
 func init():
@@ -27,11 +25,6 @@ func init():
 func _ready():
 	init()
 	add_to_group("Loot")
-
-#func _process(delta):
-##	print(get_viewport().get_mouse_position())
-#	if is_dragging:
-#		position = get_viewport().get_mouse_position() - drag_offset
 
 func rotate_left():
 	var new_group = [
@@ -83,70 +76,44 @@ func _input(event):
 	elif event.is_action_pressed("D"):
 		rotate_right()
 
-# _input -> _gui_input -> _unhandled_input
-func _gui_input(event: InputEvent):
-	print("Tile Group GUI Input")
-	if event is InputEventMouseButton:
-		if (event.is_action_pressed("LeftMouse")):
-			if is_valid_position(event.position):
-				print("Is valid, can pickup: ", event.position)
-				follow_cursor = true
-				self.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-#func _unhandled_input(event):
-#	if event.is_action_pressed("LeftMouse"):
-#		if follow_cursor:
-#			follow_cursor = false
-#			self.mouse_filter = Control.MOUSE_FILTER_PASS
-#			if event is InputEventMouseButton:
-#				print("Stop follow: ", event.position)
-
-
 func _process(delta):
-	if follow_cursor:
+	if is_dragging:
 		var mouse_pos = get_global_mouse_position()
-#		print("mouse: ", mouse_pos)
-		self.position = mouse_pos - Vector2(20, 20)
-
-func _get_drag_data(at_position: Vector2): 
-	print("get drag data: ", at_position)
-	if is_valid_position(at_position):
-		var preview = drag_preview.instantiate()
-		preview.drag_offset = at_position
-		get_tree().get_root().get_node("World/UI").add_child(preview) # Hardcode
-#		set_drag_preview(preview) # Built-in preview is bad
-		return self
+		self.position = mouse_pos - drag_offset
 	
-#func on_tile_group_drag(event: InputEvent):
-##	print(event)
-#	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-#		# init dragging
-#		if !is_dragging and is_valid_position(event.position):
-#			is_dragging = true
-#			# event.position is dragging offset
-#			drag_offset = event.position
-#			original_pos = self.global_position 
-#		elif is_dragging:
-#			is_dragging = false
-#			if is_hitting_inventory(event.position):
-#				print("release")
-#			else:
-#				position = original_pos # add animation
-#				print("place back")
-		
+func _gui_input(event: InputEvent):
+#	print(event)
+	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
+		# init dragging
+		if !is_dragging and is_valid_position(event.position):
+			is_dragging = true
+			# event.position is dragging offset
+			drag_offset = event.position
+			original_pos = self.global_position 
+#			self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		elif is_dragging:
+			print("return animation")
+			is_dragging = false
+			position = original_pos	# TODO: animation
 
 func is_valid_position(pos: Vector2) -> bool:
 #	print(pos)
-	var row = int(pos.y) / 100	# HardCode: size of one tile
-	var col = int(pos.x) / 100
-	return group[row][col] != null
-#
-#func is_hitting_inventory(pos: Vector2) -> bool:
-#	return Globals.is_mouse_inside_inventory
+	var row = int(pos.x) / 100	# HardCode: size of one tile
+	var col = int(pos.y) / 100
+	return group[col][row] != null
 
-
-func _on_inventory_drop_area_clicked():
-	print("drop")
-	if follow_cursor:
-		follow_cursor = false
-		self.mouse_filter = Control.MOUSE_FILTER_PASS
+func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vector2):
+	if is_dragging:
+		is_dragging = false
+		var slot_row = int(event_position.x) / 100
+		var slot_col = int(event_position.y) / 100
+		var slot_id = slot_col * 3 + slot_row
+		if inventory.check_availble_for_place(slot_id, self):
+			print("drop")
+			inventory.handle_drop_placement(slot_id, self)
+			is_dragging = false
+			position = original_pos
+		else:
+			print("return by drop")
+			is_dragging = false
+			position = original_pos

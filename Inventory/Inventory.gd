@@ -33,15 +33,12 @@ func _ready():
 signal drop_area_clicked
 
 func _gui_input(event):
-	print("Inventory Gui Input")
-	if event.is_action_pressed("LeftMouse"):
-		if event is InputEventMouseButton:
-			print("Trying to dorp ", event.position)
-			drop_area_clicked.emit()
-		
+#	print("Inventory Gui Input")
+	if event is InputEventMouseButton and event.is_action_pressed("LeftMouse"):
+		drop_area_clicked.emit(self, event.position)
 
 func check_availble_for_place(slot_id: int, tile_group: TileGroup) -> bool:
-	print(slot_id, " ",tile_group)
+#	print(slot_id, " ",tile_group)
 	if slot_id == 0 or slot_id == 1:
 		return true
 	elif slot_id == 2:
@@ -57,7 +54,8 @@ func handle_drop_placement(slot_id: int, tile_group: TileGroup):
 	for row in range(2):
 		for col in range(2):
 			var tile_type = tile_group.group[row][col]
+			var tile = tile_group.tiles[slot_id]
 			if tile_type != null:
 				var slot: InventorySlot = inventory_slots[slot_row + row][slot_col + col]
 				slot.tile.set_item_type(tile_type)
-			# TODO: Update rotation
+				slot.tile.set_rotation_degrees(tile.rotation_degrees)

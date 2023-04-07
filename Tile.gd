@@ -21,7 +21,6 @@ func update_tile_display(type):
 		texture_rect.texture = null
 	pass
 
-
 func rotate_left():
 	rotation_degrees -= 90
 

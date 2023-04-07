@@ -14,16 +14,11 @@ func _ready():
 			tile = child
 			break
 
-
-func _can_drop_data(at_position, data) -> bool:
-#	print("can drop data")
-	return data.is_in_group("Loot") and inventory.check_availble_for_place(slot_id, data)
-
-func _drop_data(at_position, data):
-#	print("drop data")
-	inventory.handle_drop_placement(slot_id, data)
 #
-#func on_tile_mouse_release(event):
-#	if Input.is_action_just_released("Click"):
-#		print("release")
-
+#func _can_drop_data(at_position, data) -> bool:
+##	print("can drop data")
+#	return data.is_in_group("Loot") and inventory.check_availble_for_place(slot_id, data)
+#
+#func _drop_data(at_position, data):
+##	print("drop data")
+#	inventory.handle_drop_placement(slot_id, data)
