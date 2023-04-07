@@ -124,22 +124,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7nl4l")
 
-[sub_resource type="Animation" id="Animation_elia0"]
-resource_name = "chest_open"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D/chest2/lid:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.228138, 0.3),
-"transitions": PackedFloat32Array(1.68179, 1, 2.92818),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.81536, 0, 0), Vector3(1.89368, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_s7pdi"]
 length = 0.001
 tracks/0/type = "value"
@@ -165,6 +149,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_elia0"]
+resource_name = "chest_open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/chest2/lid:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.228138, 0.3),
+"transitions": PackedFloat32Array(1.68179, 1, 2.92818),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.81536, 0, 0), Vector3(1.89368, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_stb6k"]
