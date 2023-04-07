@@ -15,8 +15,9 @@ const TWEEN_DURATION = 0.3
 
 @onready var audio = $AudioStreamPlayer3D
 
-@onready var sfx_player_attack = preload("res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav")
-@onready var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
+var sfx_player_attack = preload("res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav")
+var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
+var sfx_reward = preload("res://Audio/PUZZLE_Success_Xylophone_2_Two_Note_Climb_Bright_Delay_stereo.wav")
 
 var is_picking_skills = false
 
@@ -95,6 +96,12 @@ func take_damage(amount):
 	health -= amount
 	animation.play("take_damage") # special animation that has 0.3s for receiving attack anim and 0.3s for hit anim
 	print("Player health: ", health)
+
+func get_reward():
+	audio.stream = sfx_reward
+	audio.play()
+	is_picking_skills = true
+	ui.visible = is_picking_skills
 
 func _unhandled_input(event):
 	if event.is_action_pressed("LeftMouse"):

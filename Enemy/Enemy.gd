@@ -71,7 +71,7 @@ func take_damage(attacker, damage):
 	if health <= 0:
 		animation.play("take_damage")
 		await animation.animation_finished
-#		animation.play("die")
+		attacker.get_reward()
 #		await animation.animation_finished
 		self.queue_free()
 	else:
