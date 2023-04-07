@@ -105,8 +105,8 @@ func is_valid_position(pos: Vector2) -> bool:
 func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vector2):
 	if is_dragging:
 		is_dragging = false
-		var slot_row = int(event_position.x) / 100
-		var slot_col = int(event_position.y) / 100
+		var slot_row = int(event_position.x) / 100 - int(drag_offset.x) / 100
+		var slot_col = int(event_position.y) / 100 - int(drag_offset.y) / 100
 		var slot_id = slot_col * 3 + slot_row
 		if inventory.check_availble_for_place(slot_id, self):
 			print("drop")
