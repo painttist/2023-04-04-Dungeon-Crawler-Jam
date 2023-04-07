@@ -4,11 +4,6 @@ class_name Enemy
 
 @onready var player : Player = get_parent().get_node("Player")
 
-@onready var ray_front = $RayFront
-@onready var ray_back = $RayBack
-@onready var ray_left = $RayLeft
-@onready var ray_right = $RayRight
-
 @onready var level : GridMap = get_parent().get_node("level")
 
 @onready var animation = $AnimationPlayer
@@ -67,8 +62,11 @@ func take_damage(attacker, damage):
 #	attacker.move_back()
 	print("enemy health: ", health, " attacked by ", attacker.name)
 	if health <= 0:
+		animation.play("take_damage")
+		await animation.animation_finished
+#		animation.play("die")
+#		await animation.animation_finished
 		self.queue_free()
-		animation.play("die")
 	else:
 		animation.play("take_damage")
 		
@@ -112,7 +110,7 @@ func move_towards_player():
 		return
 #	print("Moving towards player")
 #	print(dist)
-	var cell = level.get_cell_item(self.transform.origin)
+#	var cell = level.get_cell_item(self.transform.origin)
 	var cell_f = level.get_cell_item(self.transform.translated(Vector3.FORWARD * 2).origin)
 	var cell_b = level.get_cell_item(self.transform.translated(Vector3.BACK * 2).origin)
 	var cell_l = level.get_cell_item(self.transform.translated(Vector3.LEFT * 2).origin)
@@ -172,5 +170,4 @@ func add_enemy_action():
 
 func _ready():
 	if player is Player:
-		print(player.name)
 		player.acted.connect(add_enemy_action)

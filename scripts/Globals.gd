@@ -32,7 +32,7 @@ func enemy_add_action(action: Callable):
 func player_ready() -> bool:
 	return not enemy_action_running && enemy_actions_stack.is_empty()
 
-func _process(delta):
+func _process(_delta):
 	if not enemy_actions_stack.is_empty() and not enemy_action_running:
 		enemy_action_running = true
 		await enemy_actions_stack.pop_front().call()

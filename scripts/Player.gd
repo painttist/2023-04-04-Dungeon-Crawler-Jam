@@ -11,6 +11,10 @@ const TWEEN_DURATION = 0.3
 
 @onready var animation = $AnimationPlayer
 
+@onready var ui = $SkillUI
+
+var is_picking_skills = false
+
 var tween
 
 var health = 10
@@ -76,7 +80,18 @@ func take_damage(amount):
 	animation.play("take_damage") # special animation that has 0.3s for receiving attack anim and 0.3s for hit anim
 	print("Player health: ", health)
 
+func _unhandled_input(event):
+	if event.is_action_pressed("LeftMouse"):
+		is_picking_skills = !is_picking_skills
+		ui.visible = is_picking_skills
+
+func _ready():
+	ui.visible = is_picking_skills
+
 func _physics_process(_delta):
+	
+	if is_picking_skills : return
+	
 	if tween is Tween:
 		if tween.is_running():
 			return
@@ -91,7 +106,7 @@ func _physics_process(_delta):
 		return
 		
 	if not Globals.player_ready():
-		print("Player is not ready")
+#		print("Player is not ready")
 		return
 	
 	if Input.is_action_just_pressed("Space"):
