@@ -66,6 +66,8 @@ func attack() -> void:
 	if ray_front.is_colliding():
 		var col = ray_front.get_collider()
 		if col.has_method("take_damage"):
+			animation.play("attack")
+			await animation.animation_finished
 			col.take_damage(self, 2)
 	acted.emit()
 

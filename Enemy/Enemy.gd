@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+class_name Enemy
+
 @onready var player : Player = get_parent().get_node("Player")
 
 @onready var ray_front = $RayFront
@@ -10,6 +12,13 @@ extends StaticBody3D
 @onready var level : GridMap = get_parent().get_node("level")
 
 @onready var animation = $AnimationPlayer
+
+enum ENEMY_TYPE {
+	SLIME,
+	WOLF
+}
+
+@export var type :ENEMY_TYPE
 
 const TWEEN_DURATION = 0.3
 const ROTATION_SPEED = 8.0
@@ -88,6 +97,13 @@ func move_towards_player():
 		return
 	var dist = get_dist_to_player()
 	if (dist <= MIN_MOVE_DISTANCE):
+		if animation.is_playing():
+			await animation.animation_finished
+		match type:
+			self.ENEMY_TYPE.SLIME:
+				animation.play("attack")
+			self.ENEMY_TYPE.WOLF:
+				animation.play("attack_strike")
 		player.take_damage(2)
 		return
 	
