@@ -207,3 +207,5 @@ func consume_durality(row, col):
 	if slot.tile.consume_tile_durability():
 		slot.tile.set_item_type(null)
 		slot.tile.set_item_rotation(0)
+		interactions[row][col] = null
+

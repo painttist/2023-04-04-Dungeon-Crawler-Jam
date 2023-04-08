@@ -200,8 +200,8 @@ func _physics_process(_delta):
 		return
 	
 	if inventory.interactions[row][col] != null:
+		handle_behaviour(inventory.interactions[row][col])		
 		inventory.consume_durality(row, col)
-		handle_behaviour(inventory.interactions[row][col])
 	else:
 		acted.emit()
 	
