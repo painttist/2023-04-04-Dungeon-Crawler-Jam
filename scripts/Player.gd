@@ -198,6 +198,7 @@ func _physics_process(_delta):
 	
 	if inventory.interactions[row][col] != null:
 		handle_behaviour(inventory.interactions[row][col])
+		inventory.consume_durality(row, col)
 	
 func handle_behaviour(behaviour: int):
 	if not (behaviour == Globals.TURN_LEFT || behaviour == Globals.TURN_RIGHT):

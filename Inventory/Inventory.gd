@@ -203,3 +203,9 @@ func check_arrow_interaction(direction: int) -> int:
 			return Globals.MOVE_LEFT
 		_:
 			return Globals.MOVE_FORWARD
+
+func consume_durality(row, col):
+	var slot: InventorySlot = inventory_slots[row][col]
+	if slot.tile.consume_tile_durability():
+		slot.tile.set_item_type(null)
+		slot.tile.set_item_rotation(0)
