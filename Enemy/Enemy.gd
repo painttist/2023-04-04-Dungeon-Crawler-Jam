@@ -21,6 +21,8 @@ enum ENEMY_TYPE {
 }
 
 @export var type :ENEMY_TYPE
+@export var damage: int = 1
+
 var reward
 
 const TWEEN_DURATION = 0.3
@@ -115,7 +117,7 @@ func move_towards_player():
 				audio.play()
 				animation.play("attack_strike")
 		await animation.animation_finished
-		player.take_damage(2)
+		player.take_damage(damage)
 		return
 	
 	if (get_intersect_to_player() and dist >= MAX_DISTANCE) :

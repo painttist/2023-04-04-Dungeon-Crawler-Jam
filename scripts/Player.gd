@@ -47,7 +47,7 @@ func drink_potion():
 	audio.stream = sfx_potion
 	audio.play(0.1)
 	print("player drink potion")
-	health += 1
+	health += 3
 	health_changed.emit(health)
 
 func move_forward() -> void:
@@ -202,6 +202,8 @@ func _physics_process(_delta):
 	if inventory.interactions[row][col] != null:
 		handle_behaviour(inventory.interactions[row][col])
 		inventory.consume_durality(row, col)
+	else:
+		acted.emit()
 	
 func handle_behaviour(behaviour: int):
 	if not (behaviour == Globals.TURN_LEFT || behaviour == Globals.TURN_RIGHT):

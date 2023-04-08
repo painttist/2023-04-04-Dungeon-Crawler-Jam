@@ -41,10 +41,10 @@ func _ready():
 #	slot.tile.set_item_rotation(-90)
 #	interactions[1][0] = Globals.MOVE_LEFT	
 #
-#	slot  = inventory_slots[1][1]
-#	slot.tile.set_item_type(Globals.ARROW)
-#	slot.tile.set_item_rotation(180)	
-#	interactions[1][1] = Globals.MOVE_BACK
+	slot  = inventory_slots[1][1]
+	slot.tile.set_item_type(Globals.ARROW)
+	slot.tile.set_item_rotation(180)	
+	interactions[1][1] = Globals.MOVE_BACK
 #
 #	slot  = inventory_slots[1][2]
 #	slot.tile.set_item_type(Globals.ARROW)
@@ -158,11 +158,9 @@ func update_keyboard_interactions():
 						Globals.ATTACK_BROKEN_WAND)
 	
 	# check update
-	for row in range(2):
-		for col in range(3):
-			print(interactions[row][col])
-	
-	pass
+#	for row in range(2):
+#		for col in range(3):
+#			print(interactions[row][col])
 	
 func get_slot_by_direction(slot_id, direction: int) -> InventorySlot:
 	var dir = (direction % 360 + 360) % 360

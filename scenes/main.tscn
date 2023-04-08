@@ -108,22 +108,27 @@ health = 4
 
 [node name="Wolf" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
+damage = 2
 health = 10
 
 [node name="Wolf3" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0.877, 8)
+damage = 2
 health = 10
 
 [node name="Wolf4" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, 8)
+damage = 2
 health = 10
 
 [node name="Wolf5" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0.877, 8)
+damage = 2
 health = 10
 
 [node name="Wolf6" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.877, 2)
+damage = 2
 health = 10
 
 [node name="Chest" parent="." instance=ExtResource("8_0hfbb")]
