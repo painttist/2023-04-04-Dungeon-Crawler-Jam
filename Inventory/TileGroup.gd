@@ -25,11 +25,16 @@ func init():
 			tiles.append(child)
 	group = Globals.get_rand_tile_set()
 	update_tiles()
+	reset_rotation()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
 #	add_to_group("Loot")
+
+func reset_rotation():
+	for tile in tiles:
+		tile.set_item_rotation(0)
 
 func rotate_left():
 	var new_group = [
