@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://62ctsp0pk62d" path="res://Sprites/skill_ui_bg.png" id="4_jm2q3"]
 [ext_resource type="PackedScene" uid="uid://it8fxyv3dr1e" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
-[ext_resource type="Texture2D" uid="uid://h030lwx4xpcj" path="res://Sprites/turn_left.png" id="7_ajb1w"]
+[ext_resource type="Texture2D" uid="uid://ckruear8kq0sc" path="res://Sprites/button_turn_left.png" id="7_2q3a8"]
 [ext_resource type="PackedScene" uid="uid://bactju1vjjbfu" path="res://Chest/Chest.tscn" id="8_0hfbb"]
-[ext_resource type="Texture2D" uid="uid://doo2ua64n4vj3" path="res://Sprites/turn_right.png" id="8_ibk8h"]
+[ext_resource type="Texture2D" uid="uid://bdbgf7mtym17r" path="res://Sprites/button_turn_right.png" id="8_ckp3m"]
 [ext_resource type="Texture2D" uid="uid://tlv4yv1xjv85" path="res://Sprites/heart_icon.png" id="9_6lejp"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="9_jmyin"]
 [ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
@@ -50,14 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877, 2)
 [node name="SkillUI" type="CanvasLayer" parent="Player"]
 script = ExtResource("4_7qm52")
 
-[node name="BG" type="Sprite2D" parent="Player/SkillUI"]
-position = Vector2(592, 335)
-scale = Vector2(0.859492, 1.9729)
-texture = ExtResource("4_jm2q3")
-
-[node name="TileGroup" parent="Player/SkillUI" instance=ExtResource("12_nqgqt")]
-position = Vector2(494, 186)
-
 [node name="ColorRect" type="ColorRect" parent="Player/SkillUI"]
 material = SubResource("ShaderMaterial_0gqbr")
 anchors_preset = 15
@@ -67,21 +59,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="BG" type="Sprite2D" parent="Player/SkillUI"]
+visible = false
+position = Vector2(592, 335)
+scale = Vector2(0.859492, 1.9729)
+texture = ExtResource("4_jm2q3")
+
+[node name="TileGroup" parent="Player/SkillUI" instance=ExtResource("12_nqgqt")]
+position = Vector2(494, 186)
+
 [node name="LeftButton" type="TextureButton" parent="Player/SkillUI"]
-offset_left = 382.0
-offset_top = 286.0
-offset_right = 482.0
-offset_bottom = 386.0
-rotation = -0.758239
-texture_normal = ExtResource("7_ajb1w")
+offset_left = 380.0
+offset_top = 250.0
+offset_right = 480.0
+offset_bottom = 350.0
+texture_normal = ExtResource("7_2q3a8")
 
 [node name="RightButton" type="TextureButton" parent="Player/SkillUI"]
-offset_left = 731.0
-offset_top = 215.0
-offset_right = 831.0
-offset_bottom = 315.0
-rotation = 0.783103
-texture_normal = ExtResource("8_ibk8h")
+offset_left = 700.0
+offset_top = 250.0
+offset_right = 800.0
+offset_bottom = 350.0
+texture_normal = ExtResource("8_ckp3m")
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="Player"]
 
