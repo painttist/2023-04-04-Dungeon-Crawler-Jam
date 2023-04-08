@@ -10,3 +10,5 @@ func update_reward(reward):
 	tile_group.group = reward
 	tile_group.update_tiles()
 	tile_group.reset_rotation()
+
+

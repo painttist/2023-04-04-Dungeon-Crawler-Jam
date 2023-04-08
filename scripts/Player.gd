@@ -165,6 +165,10 @@ func _ready():
 	inventory = find_child("Inventory")
 #	print(inventory)
 
+func on_button_close_skill_ui():
+	ui.visible = false
+	is_picking_skills = false
+
 func _physics_process(_delta):
 	
 	if is_picking_skills : return
@@ -238,3 +242,6 @@ func handle_behaviour(behaviour: int):
 			attack(1)
 		_:
 			attack(1)
+
+func restart_game():
+	get_tree().reload_current_scene()
