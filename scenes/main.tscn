@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=25 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://b6f6sijuyrdlg" path="res://Sprites/button_restart.png" id="15_k0gn8"]
 [ext_resource type="Script" path="res://scripts/ShieldUI.gd" id="16_87btl"]
 [ext_resource type="Texture2D" uid="uid://bf80yrkp7id3q" path="res://Sprites/shield_clean.png" id="16_k3g2t"]
+[ext_resource type="AudioStream" uid="uid://bu4jghi6av1jf" path="res://Audio/pickup.mp3" id="21_f2wg1"]
+[ext_resource type="Script" path="res://scripts/AudioUISFX.gd" id="22_cih4g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gqbr"]
 shader = ExtResource("3_xho3t")
@@ -259,8 +261,14 @@ script = ExtResource("16_87btl")
 
 [node name="Pickup" parent="." instance=ExtResource("13_t1gyg")]
 
+[node name="AudioUISFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_f2wg1")
+script = ExtResource("22_cih4g")
+
 [connection signal="defend_changed" from="Player" to="CanvasLayer2/ShieldUI" method="_on_player_defend_changed"]
 [connection signal="health_changed" from="Player" to="CanvasLayer2/HealthBar" method="_on_player_health_changed"]
+[connection signal="drop" from="Player/SkillUI/TileGroup" to="AudioUISFX" method="_on_tile_group_drop"]
+[connection signal="start_drag" from="Player/SkillUI/TileGroup" to="AudioUISFX" method="_on_tile_group_start_drag"]
 [connection signal="button_down" from="Player/SkillUI/LeftButton" to="Player/SkillUI/TileGroup" method="rotate_left"]
 [connection signal="button_down" from="Player/SkillUI/RightButton" to="Player/SkillUI/TileGroup" method="rotate_right"]
 [connection signal="button_down" from="Player/SkillUI/LeaveButton" to="Player" method="on_button_close_skill_ui"]

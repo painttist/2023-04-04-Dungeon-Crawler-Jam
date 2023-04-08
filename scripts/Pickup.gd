@@ -1,7 +1,7 @@
 extends StaticBody3D
 
 @onready var player : Player = get_parent().get_node("Player")
-@onready var reward = [[Globals.KNIFE, Globals.RIGHT], [Globals.SHIELD, null]]
+@onready var reward = [[Globals.KNIFE, Globals.RIGHT], [null, null]]
 
 func picked_up(player):
 	print("picked up")

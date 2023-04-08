@@ -86,6 +86,9 @@ func update_tiles():
 #	elif event.is_action_pressed("D"):
 #		rotate_right()
 
+signal start_drag
+signal drop
+
 func _process(delta):
 	if is_dragging:
 		var mouse_pos = get_global_mouse_position()
@@ -99,6 +102,7 @@ func _input_event(viewport, event, shape_idx):
 		# init dragging
 		if !is_dragging and is_valid_position(local_pos):
 			print("start drag")
+			start_drag.emit()
 			is_dragging = true
 			# event.position is dragging offset
 			drag_offset = local_pos
@@ -133,6 +137,7 @@ func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vecto
 		var slot_id = slot_row * 3 + slot_col
 		if inventory.check_availble_for_place(slot_id, self):
 			print("drop")
+			drop.emit()
 			inventory.handle_drop_placement(slot_id, self)
 			position = original_pos
 #			self.visible = false
