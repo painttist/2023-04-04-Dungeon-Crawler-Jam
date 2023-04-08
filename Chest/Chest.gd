@@ -11,7 +11,7 @@ var health = 10
 @onready var animation = $AnimationPlayer
 @onready var audio = $AudioStreamPlayer3D
 @onready var audio_hit = $AudioStreamPlayer3D2
-@onready var reward = Globals.get_rand_tile_set()
+@onready var reward = Globals.get_rand_chest_loot()
 
 func take_damage(attacker : Player, damage):
 	health -= damage

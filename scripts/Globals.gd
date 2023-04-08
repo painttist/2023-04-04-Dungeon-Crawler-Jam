@@ -18,10 +18,35 @@ enum {
 	KEY
 }
 
-const tiles = [
-	[[SWORD_UP, ARROW], [SWORD_DOWN, null]],
-	[[ARROW, ARROW], [null, null]],
+#const tiles = [
+#	[[SWORD_UP, ARROW], [SWORD_DOWN, null]],
+#	[[ARROW, ARROW], [null, null]],
+#	[[WAND_UP, null], [WAND_DOWN, null]],
+#]
+
+const slime_loot = [
+	[[KNIFE, ARROW], [null, null]],
+	[[KNIFE, ARROW], [null, null]],
+	[[KNIFE, LEFT], [null, null]],
+	[[KNIFE, LEFT], [null, null]],
+	[[KNIFE, RIGHT], [null, null]],
+	[[POTION, RIGHT], [null, null]],
+	[[POTION, null], [POTION, null]],	
+	[[KNIFE, null], [null, KNIFE]],
 	[[WAND_UP, null], [WAND_DOWN, null]],
+]
+
+const chest_loot = [
+	[[SWORD_UP, null], [SWORD_DOWN, LEFT]],
+	
+]
+
+const wolf_loot = [
+	[[WAND_UP, ARROW], [WAND_DOWN, null]],
+	[[SWORD_UP, POTION], [SWORD_DOWN, null]],
+	[[SWORD_UP, null], [SWORD_DOWN, ARROW]],
+	[[SWORD_UP, POTION], [SWORD_DOWN, null]],
+	[[POTION, POTION], [POTION, POTION]],
 ]
 
 # behaviours
@@ -54,8 +79,17 @@ var sprite_dict = {
 	POTION: preload("res://Sprites/potion_clean.png")
 }
 
-func get_rand_tile_set():
-	return tiles[randi() % tiles.size()]
+#func get_rand_tile_set():
+#	return tiles[randi() % tiles.size()]
+	
+func get_rand_slime_loot():
+	return slime_loot[randi() % slime_loot.size()]
+	
+func get_rand_chest_loot():
+	return chest_loot[randi() % chest_loot.size()]
+	
+func get_rand_wolf_loot():
+	return wolf_loot[randi() % wolf_loot.size()]
 
 var enemy_actions_stack: Array[Callable] = [
 	#func (): await get_tree().create_timer(2.0).timeout
@@ -73,3 +107,4 @@ func _process(_delta):
 		enemy_action_running = true
 		await enemy_actions_stack.pop_front().call()
 		enemy_action_running = false
+
