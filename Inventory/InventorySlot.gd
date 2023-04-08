@@ -6,8 +6,13 @@ var inventory: Inventory
 var slot_id
 var tile: Tile
 
+@onready var label = $Control/Label
+
+@export var key: String
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	label.text = key
 	inventory = get_parent()
 	for child in get_children():
 		if is_instance_of(child, Tile):
