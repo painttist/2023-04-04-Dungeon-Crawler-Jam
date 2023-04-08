@@ -88,33 +88,43 @@ texture_normal = ExtResource("8_ckp3m")
 position = Vector2(447, 412)
 
 [node name="Slime" parent="." instance=ExtResource("5_obdrs")]
+health = 4
+
+[node name="Slime5" parent="." instance=ExtResource("5_obdrs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.877, -2)
+health = 4
 
 [node name="Slime2" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.877, -8)
+health = 4
 
 [node name="Slime3" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, -6)
+health = 4
 
 [node name="Slime4" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, -4)
+health = 4
 
 [node name="Wolf" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
-
-[node name="Wolf2" parent="." instance=ExtResource("6_scurk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, -2)
+health = 10
 
 [node name="Wolf3" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0.877, 8)
+health = 10
 
 [node name="Wolf4" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, 8)
+health = 10
 
 [node name="Wolf5" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0.877, 8)
+health = 10
 
 [node name="Wolf6" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.877, 2)
+health = 10
 
 [node name="Chest" parent="." instance=ExtResource("8_0hfbb")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -6)

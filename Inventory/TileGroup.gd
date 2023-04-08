@@ -23,7 +23,7 @@ func init():
 	for child in children:
 		if child is Tile:
 			tiles.append(child)
-	group = Globals.get_rand_tile_set()
+	group = [[null, null], [null, null]]
 	update_tiles()
 	reset_rotation()
 

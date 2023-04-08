@@ -178,22 +178,22 @@ func _physics_process(_delta):
 	var check_input = false
 	var row
 	var col
-	if Input.is_action_pressed("Q"):
+	if Input.is_action_just_pressed("Q"):
 		row = 0
 		col = 0
-	elif Input.is_action_pressed("W"):
+	elif Input.is_action_just_pressed("W"):
 		row = 0
 		col = 1
-	elif Input.is_action_pressed("E"):
+	elif Input.is_action_just_pressed("E"):
 		row = 0
 		col = 2
-	elif Input.is_action_pressed("A"):
+	elif Input.is_action_just_pressed("A"):
 		row = 1
 		col = 0
-	elif Input.is_action_pressed("S"):
+	elif Input.is_action_just_pressed("S"):
 		row = 1
 		col = 1
-	elif Input.is_action_pressed("D"):
+	elif Input.is_action_just_pressed("D"):
 		row = 1
 		col = 2
 	else:

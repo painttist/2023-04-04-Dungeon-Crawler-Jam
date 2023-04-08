@@ -63,7 +63,7 @@ func _physics_process(delta):
 	if get_intersect_to_player().is_empty():
 		look_at_player_smooth(delta)
 
-var health = 2
+@export var health = 2
 
 func take_damage(attacker: Player, damage):
 	health -= damage
@@ -197,5 +197,8 @@ func _ready():
 	if player is Player:
 		player.acted.connect(add_enemy_action)
 
-	reward = Globals.get_rand_tile_set()
+	if type == ENEMY_TYPE.WOLF:
+		reward = Globals.get_rand_wolf_loot()
+	elif type == ENEMY_TYPE.SLIME:
+		reward = Globals.get_rand_slime_loot()
 	print(reward)
