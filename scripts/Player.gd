@@ -19,6 +19,8 @@ var sfx_player_attack = preload("res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav")
 var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
 var sfx_reward = preload("res://Audio/PUZZLE_Success_Xylophone_2_Two_Note_Climb_Bright_Delay_stereo.wav")
 var sfx_potion = preload("res://Audio/drink.mp3")
+var sfx_shield = preload("res://Audio/shield.mp3")
+var sfx_equip = preload("res://Audio/equip.mp3")
 
 var is_picking_skills = false
 var inventory: Inventory
@@ -26,11 +28,12 @@ var inventory: Inventory
 var tween
 
 var health = 10
+var is_defending = false
 
 signal acted
 
 signal health_changed
-
+signal defend_changed
 
 func play_walk_audio():
 	audio.stream = sfx_player_walk
@@ -64,6 +67,7 @@ func move_forward() -> void:
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_bob")
 		play_walk_audio()
+		reset_defend()
 	else:
 		animation.play("head_bob")
 #		print_debug("touching ", ray_front.get_collider().name)
@@ -82,6 +86,7 @@ func move_back() -> void:
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_bob")
 		play_walk_audio()
+		reset_defend()
 	else:
 		animation.play("head_bob")
 
@@ -99,6 +104,7 @@ func move_left() -> void:
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_left")
 		play_walk_audio()
+		reset_defend()
 	else:
 		animation.play("head_bob")
 
@@ -116,6 +122,7 @@ func move_right() -> void:
 		tween.tween_callback(func(): acted.emit())
 		animation.play("head_tilt_right")
 		play_walk_audio()
+		reset_defend()
 	else:
 		animation.play("head_bob")
 
@@ -127,6 +134,19 @@ func turn_left() -> void:
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "transform", transform.rotated_local(Vector3.UP, PI/2), TWEEN_DURATION)
 
+func defend() -> void:
+	audio.stream = sfx_equip
+	audio.play()
+	animation.play("head_tilt_left")
+	is_defending = true
+	defend_changed.emit(is_defending)
+	await animation.animation_finished
+	acted.emit()
+
+func reset_defend() :
+	is_defending = false
+	defend_changed.emit(is_defending)
+
 func attack(player_damage: int) -> void:
 	if ray_front.is_colliding():
 		var col = ray_front.get_collider()
@@ -137,9 +157,16 @@ func attack(player_damage: int) -> void:
 				animation.play("attack")
 				await animation.animation_finished
 				col.take_damage(self, player_damage)
+	reset_defend()
 	acted.emit()
 
 func take_damage(amount):
+	if (is_defending):
+		audio.stream = sfx_shield
+		audio.play()
+		reset_defend()
+		print("Defended")
+		return
 	health -= amount
 	health_changed.emit(health)
 	animation.play("take_damage") # special animation that has 0.3s for receiving attack anim and 0.3s for hit anim
@@ -240,6 +267,8 @@ func handle_behaviour(behaviour: int):
 			attack(5)
 		Globals.ATTACK_BROKEN_WAND:
 			attack(1)
+		Globals.DEFEND_SHIELD:
+			defend()
 		_:
 			attack(1)
 

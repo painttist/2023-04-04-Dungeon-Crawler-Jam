@@ -76,7 +76,8 @@ var sprite_dict = {
 	LEFT: preload("res://Sprites/turn_left_clean.png"),
 	RIGHT: preload("res://Sprites/turn_right_clean.png"),
 	KNIFE: preload("res://Sprites/sword_clean.png"),
-	POTION: preload("res://Sprites/potion_clean.png")
+	POTION: preload("res://Sprites/potion_clean.png"),
+	SHIELD: preload("res://Sprites/shield_clean.png")
 }
 
 #func get_rand_tile_set():
