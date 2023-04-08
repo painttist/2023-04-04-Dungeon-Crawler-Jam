@@ -45,5 +45,7 @@ func init_durability():
 	match item_type:
 		Globals.POTION:
 			durability = 1
+		Globals.SHIELD:
+			durability
 		_:
 			9999

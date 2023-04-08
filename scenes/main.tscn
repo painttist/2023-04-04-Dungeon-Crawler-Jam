@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=23 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
@@ -26,6 +26,12 @@ shader = ExtResource("3_xho3t")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = -0.869
 shader_parameter/softness = 1.403
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4fhc"]
+font_size = 80
+font_color = Color(0.911332, 0.0652282, 0.0392168, 1)
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -99,48 +105,53 @@ texture_normal = ExtResource("9_u5myb")
 position = Vector2(447, 412)
 
 [node name="Slime" parent="." instance=ExtResource("5_obdrs")]
-health = 6
+health = 5
 
 [node name="Slime5" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.877, -2)
-health = 6
+health = 5
 
 [node name="Slime2" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.877, -8)
-health = 6
+health = 5
 
 [node name="Slime3" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, -6)
-health = 6
+health = 5
 
 [node name="Slime4" parent="." instance=ExtResource("5_obdrs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, -4)
-health = 6
+health = 5
 
 [node name="Wolf" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.877, 2)
 damage = 2
-health = 10
+attack_cd = 3
+health = 6
 
 [node name="Wolf3" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0.877, 8)
 damage = 2
-health = 10
+attack_cd = 3
+health = 6
 
 [node name="Wolf4" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.877, 8)
 damage = 2
-health = 10
+attack_cd = 3
+health = 6
 
 [node name="Wolf5" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0.877, 8)
 damage = 2
-health = 10
+attack_cd = 3
+health = 6
 
 [node name="Wolf6" parent="." instance=ExtResource("6_scurk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.877, 2)
 damage = 2
-health = 10
+attack_cd = 3
+health = 6
 
 [node name="Chest" parent="." instance=ExtResource("8_0hfbb")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -6)
@@ -169,6 +180,16 @@ autoplay = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 2
+
+[node name="Dead" type="Label" parent="CanvasLayer2"]
+visible = false
+offset_left = 437.0
+offset_top = 298.0
+offset_right = 755.0
+offset_bottom = 429.0
+text = "You Die"
+label_settings = SubResource("LabelSettings_g4fhc")
+uppercase = true
 
 [node name="RestartButton" type="TextureButton" parent="CanvasLayer2"]
 offset_left = 1038.0
