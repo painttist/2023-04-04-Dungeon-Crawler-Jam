@@ -46,6 +46,6 @@ func init_durability():
 		Globals.POTION:
 			durability = 1
 		Globals.SHIELD:
-			durability
+			durability = 4
 		_:
 			9999
