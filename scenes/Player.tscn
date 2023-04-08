@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c30gtqlkrth85"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_mr61o"]
-[ext_resource type="Texture2D" uid="uid://cwdo64ylusvjf" path="res://Sprites/sword.png" id="2_fofk2"]
+[ext_resource type="Texture2D" uid="uid://ccmcnvnnmqyti" path="res://Sprites/large_sword_clean.png" id="2_s0kmh"]
 [ext_resource type="AudioStream" uid="uid://42yp3il8p86a" path="res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav" id="3_57fgf"]
 
 [sub_resource type="Environment" id="Environment_wuqtq"]
@@ -203,7 +203,10 @@ libraries = {
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.431527, 0.147075, -0.44917, -0.14471, 0.620129, 0.0640271, 0.449938, 0.0583906, 0.451383, 0.54348, -0.065041, -0.575877)
-texture = ExtResource("2_fofk2")
+
+[node name="Sprite3D" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(-0.455545, 0.890213, 0, -0.890213, -0.455545, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("2_s0kmh")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 

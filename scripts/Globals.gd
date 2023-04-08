@@ -43,15 +43,15 @@ enum {
 }
 
 var sprite_dict = {
-	ARROW: preload("res://Sprites/arrow_up.png"),
-	SWORD_UP: preload("res://Sprites/sword_up.png"),
-	SWORD_DOWN: preload("res://Sprites/sword_down.png"),
-	WAND_UP: preload("res://Sprites/wand_up.png"),
-	WAND_DOWN: preload("res://Sprites/wand_down.png"),
-	LEFT: preload("res://Sprites/turn_left.png"),
-	RIGHT: preload("res://Sprites/turn_right.png"),
-	KNIFE: preload("res://Sprites/sword.png"),
-	POTION: preload("res://Sprites/potion.png")
+	ARROW: preload("res://Sprites/arrow_up_clean.png"),
+	SWORD_UP: preload("res://Sprites/sword_up_clean.png"),
+	SWORD_DOWN: preload("res://Sprites/sword_down_clean.png"),
+	WAND_UP: preload("res://Sprites/wand_up_clean.png"),
+	WAND_DOWN: preload("res://Sprites/wand_down_clean.png"),
+	LEFT: preload("res://Sprites/turn_left_clean.png"),
+	RIGHT: preload("res://Sprites/turn_right_clean.png"),
+	KNIFE: preload("res://Sprites/sword_clean.png"),
+	POTION: preload("res://Sprites/potion_clean.png")
 }
 
 func get_rand_tile_set():
