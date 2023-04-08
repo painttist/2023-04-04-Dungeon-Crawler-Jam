@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwvlsfbtdge2o"]
+
+[ext_resource type="Script" path="res://scripts/Pickup.gd" id="1_562co"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3ysks"]
+size = Vector2(0.6, 0.8)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sxgny"]
+
+[node name="Pickup" type="StaticBody3D"]
+script = ExtResource("1_562co")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.589748, 0)
+mesh = SubResource("PlaneMesh_3ysks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_sxgny")

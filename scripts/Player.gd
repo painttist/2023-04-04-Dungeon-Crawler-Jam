@@ -33,8 +33,22 @@ func play_walk_audio():
 	audio.stream = sfx_player_walk
 	audio.play()	
 
+func check_pickup(collided: Node3D) -> bool:
+	if collided.has_method("picked_up"):
+#		print("Can pickup")
+		collided.picked_up(self)
+		return true
+	return false
+
 func move_forward() -> void:
+	var will_move = false
 	if not ray_front.is_colliding():
+		will_move = true
+	else:
+		var collided : Node3D = ray_front.get_collider()
+		will_move = check_pickup(collided)
+	
+	if will_move:
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.FORWARD * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
@@ -45,7 +59,14 @@ func move_forward() -> void:
 #		print_debug("touching ", ray_front.get_collider().name)
 
 func move_back() -> void:
+	var will_move = false
 	if not ray_back.is_colliding():
+		will_move = true
+	else:
+		var collided : Node3D = ray_back.get_collider()
+		will_move = check_pickup(collided)
+	
+	if will_move:
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.BACK * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
@@ -55,7 +76,14 @@ func move_back() -> void:
 		animation.play("head_bob")
 
 func move_left() -> void:
+	var will_move = false
 	if not ray_left.is_colliding():
+		will_move = true
+	else:
+		var collided : Node3D = ray_left.get_collider()
+		will_move = check_pickup(collided)
+		
+	if will_move:
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.LEFT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
@@ -65,7 +93,14 @@ func move_left() -> void:
 		animation.play("head_bob")
 
 func move_right() -> void:
+	var will_move = false
 	if not ray_right.is_colliding():
+		will_move = true
+	else:
+		var collided : Node3D = ray_right.get_collider()
+		will_move = check_pickup(collided)
+		
+	if will_move:
 		tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(self, "transform", transform.translated_local(Vector3.RIGHT * 2), TWEEN_DURATION)
 		tween.tween_callback(func(): acted.emit())
