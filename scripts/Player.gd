@@ -18,6 +18,7 @@ const TWEEN_DURATION = 0.3
 var sfx_player_attack = preload("res://Audio/WHOOSH_Air_Very_Fast_RR2_mono.wav")
 var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
 var sfx_reward = preload("res://Audio/PUZZLE_Success_Xylophone_2_Two_Note_Climb_Bright_Delay_stereo.wav")
+var sfx_potion = preload("res://Audio/drink.mp3")
 
 var is_picking_skills = false
 var inventory: Inventory
@@ -43,6 +44,8 @@ func check_pickup(collided: Node3D) -> bool:
 	return false
 	
 func drink_potion():
+	audio.stream = sfx_potion
+	audio.play(0.1)
 	print("player drink potion")
 	health += 1
 	health_changed.emit(health)
