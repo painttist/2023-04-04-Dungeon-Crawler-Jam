@@ -1,10 +1,11 @@
 extends StaticBody3D
 
 @onready var player : Player = get_parent().get_node("Player")
+@onready var reward = Globals.get_rand_tile_set()
 
 func picked_up(player):
 	print("picked up")
-	player.get_reward()
+	player.get_reward(reward)
 	self.queue_free()
 
 const ROTATION_SPEED = 8.0

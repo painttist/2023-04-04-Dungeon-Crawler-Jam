@@ -21,6 +21,7 @@ enum ENEMY_TYPE {
 }
 
 @export var type :ENEMY_TYPE
+var reward
 
 const TWEEN_DURATION = 0.3
 const ROTATION_SPEED = 8.0
@@ -64,14 +65,14 @@ func _physics_process(delta):
 
 var health = 2
 
-func take_damage(attacker, damage):
+func take_damage(attacker: Player, damage):
 	health -= damage
 #	attacker.move_back()
 	print("enemy health: ", health, " attacked by ", attacker.name)
 	if health <= 0:
 		animation.play("take_damage")
 		await animation.animation_finished
-		attacker.get_reward()
+		attacker.get_reward(reward)
 #		await animation.animation_finished
 		self.queue_free()
 	else:
@@ -195,3 +196,6 @@ func add_enemy_action():
 func _ready():
 	if player is Player:
 		player.acted.connect(add_enemy_action)
+
+	reward = Globals.get_rand_tile_set()
+	print(reward)

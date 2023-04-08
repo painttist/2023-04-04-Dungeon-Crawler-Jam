@@ -6,6 +6,8 @@ var is_mouse_inside_inventory: bool = false
 enum {
 #	NONE, # use null instead
 	ARROW,
+	LEFT,
+	RIGHT,
 	SWORD_UP,
 	SWORD_DOWN,
 	KNIFE,
@@ -45,7 +47,9 @@ var sprite_dict = {
 	SWORD_UP: preload("res://Sprites/sword_up.png"),
 	SWORD_DOWN: preload("res://Sprites/sword_down.png"),
 	WAND_UP: preload("res://Sprites/wand_up.png"),
-	WAND_DOWN: preload("res://Sprites/wand_down.png")
+	WAND_DOWN: preload("res://Sprites/wand_down.png"),
+	LEFT: preload("res://Sprites/turn_left.png"),
+	RIGHT: preload("res://Sprites/turn_right.png"),
 }
 
 func get_rand_tile_set():

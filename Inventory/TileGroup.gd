@@ -14,8 +14,11 @@ var drag_offset: Vector2
 var original_pos: Vector2
 const drag_preview = preload("res://Inventory/TileGroupPreview.tscn")
 
+@onready var skill_ui: SkillUI = get_parent()
+@onready var player: Player = get_parent().get_parent()
+
 func init():
-	print("Init Tilegroup")
+#	print("Init Tilegroup")
 	var children = get_children()
 	for child in children:
 		if child is Tile:
@@ -72,11 +75,11 @@ func update_tiles():
 			tiles[tile_counter].set_item_type(group[row][col])
 			tile_counter += 1
 
-func _input(event):
-	if event.is_action_pressed("A"):
-		rotate_left()
-	elif event.is_action_pressed("D"):
-		rotate_right()
+#func _input(event):
+#	if event.is_action_pressed("A"):
+#		rotate_left()
+#	elif event.is_action_pressed("D"):
+#		rotate_right()
 
 func _process(delta):
 	if is_dragging:
@@ -119,10 +122,14 @@ func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vecto
 			print("drop")
 			inventory.handle_drop_placement(slot_id, self)
 			position = original_pos
+#			self.visible = false
 			self.input_pickable = true
+			
+			# restore player action
+			skill_ui.visible = false
+			player.is_picking_skills = false
 		else:
 			print("return by drop")
 			position = original_pos
 			drag_offset = Vector2.ZERO
 			self.input_pickable = true
-

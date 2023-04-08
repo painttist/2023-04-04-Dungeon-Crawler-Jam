@@ -11,7 +11,7 @@ const TWEEN_DURATION = 0.3
 
 @onready var animation = $AnimationPlayer
 
-@onready var ui = $SkillUI
+@onready var ui: SkillUI = $SkillUI
 
 @onready var audio = $AudioStreamPlayer3D
 
@@ -20,6 +20,7 @@ var sfx_player_walk = preload("res://Audio/IMPACT_Stone_Deep_mono.wav")
 var sfx_reward = preload("res://Audio/PUZZLE_Success_Xylophone_2_Two_Note_Climb_Bright_Delay_stereo.wav")
 
 var is_picking_skills = false
+var inventory: Inventory
 
 var tween
 
@@ -28,6 +29,7 @@ var health = 10
 signal acted
 
 signal health_changed
+
 
 func play_walk_audio():
 	audio.stream = sfx_player_walk
@@ -138,19 +140,22 @@ func take_damage(amount):
 		await animation.animation_finished
 		get_tree().reload_current_scene()
 
-func get_reward():
+func get_reward(reward):
 	audio.stream = sfx_reward
 	audio.play()
 	is_picking_skills = true
 	ui.visible = is_picking_skills
+	ui.update_reward(reward)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("LeftMouse"):
-		is_picking_skills = !is_picking_skills
-		ui.visible = is_picking_skills
+#func _unhandled_input(event):
+#	if event.is_action_pressed("LeftMouse"):
+#		is_picking_skills = !is_picking_skills
+#		ui.visible = is_picking_skills
 
 func _ready():
 	ui.visible = is_picking_skills
+	inventory = find_child("Inventory")
+#	print(inventory)
 
 func _physics_process(_delta):
 	
@@ -162,28 +167,51 @@ func _physics_process(_delta):
 	if animation.is_playing():
 		return
 	
+	var check_input = false
+	var row
+	var col
 	if Input.is_action_pressed("Q"):
-		turn_left()
-		return
-	elif Input.is_action_pressed("E"):
-		turn_right()
-		return
-		
-	if not Globals.player_ready():
-#		print("Player is not ready")
-		return
-	
-	if Input.is_action_just_pressed("Space"):
-		attack()
+		row = 0
+		col = 0
 	elif Input.is_action_pressed("W"):
-		move_forward()
-	elif Input.is_action_pressed("S"):
-		move_back()
+		row = 0
+		col = 1
+	elif Input.is_action_pressed("E"):
+		row = 0
+		col = 2
 	elif Input.is_action_pressed("A"):
-		move_left()
+		row = 1
+		col = 0
+	elif Input.is_action_pressed("S"):
+		row = 1
+		col = 1
 	elif Input.is_action_pressed("D"):
-		move_right()
+		row = 1
+		col = 2
+	else:
+		return
 	
-#func handle_behaviour(behaviour: int):
-#	match behaviour:
-#
+	if inventory.interactions[row][col] != null:
+		handle_behaviour(inventory.interactions[row][col])
+	
+func handle_behaviour(behaviour: int):
+	if not (behaviour == Globals.TURN_LEFT || behaviour == Globals.TURN_RIGHT):
+		if not Globals.player_ready():
+			print("Player is not ready")
+			return
+		
+	match behaviour:
+		Globals.MOVE_FORWARD:
+			move_forward()
+		Globals.MOVE_BACK:
+			move_back()
+		Globals.MOVE_LEFT:
+			move_left()
+		Globals.MOVE_RIGHT:
+			move_right()
+		Globals.TURN_LEFT:
+			turn_left()
+		Globals.TURN_RIGHT:
+			turn_right()
+		_:
+			attack()

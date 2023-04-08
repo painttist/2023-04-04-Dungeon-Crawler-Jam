@@ -1,12 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0eesu6rmapiv"]
+[gd_scene load_steps=18 format=3 uid="uid://d0eesu6rmapiv"]
 
 [ext_resource type="PackedScene" uid="uid://bn16mxog0h06t" path="res://scenes/level.tscn" id="1_wxf7x"]
 [ext_resource type="PackedScene" uid="uid://c30gtqlkrth85" path="res://scenes/Player.tscn" id="2_h8jw0"]
-[ext_resource type="Texture2D" uid="uid://83ms41eytn3n" path="res://Sprites/icon.svg" id="3_c37im"]
 [ext_resource type="Shader" path="res://shader/vignette.gdshader" id="3_xho3t"]
+[ext_resource type="Script" path="res://scripts/SkillUI.gd" id="4_7qm52"]
+[ext_resource type="Texture2D" uid="uid://62ctsp0pk62d" path="res://Sprites/skill_ui_bg.png" id="4_jm2q3"]
 [ext_resource type="PackedScene" uid="uid://it8fxyv3dr1e" path="res://Enemy/Slime.tscn" id="5_obdrs"]
 [ext_resource type="PackedScene" uid="uid://b2l1gfpihe2es" path="res://Enemy/Wolf.tscn" id="6_scurk"]
+[ext_resource type="Texture2D" uid="uid://h030lwx4xpcj" path="res://Sprites/turn_left.png" id="7_ajb1w"]
 [ext_resource type="PackedScene" uid="uid://bactju1vjjbfu" path="res://Chest/Chest.tscn" id="8_0hfbb"]
+[ext_resource type="Texture2D" uid="uid://doo2ua64n4vj3" path="res://Sprites/turn_right.png" id="8_ibk8h"]
 [ext_resource type="Texture2D" uid="uid://tlv4yv1xjv85" path="res://Sprites/heart_icon.png" id="9_6lejp"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="9_jmyin"]
 [ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
@@ -45,10 +48,15 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877, 2)
 
 [node name="SkillUI" type="CanvasLayer" parent="Player"]
+script = ExtResource("4_7qm52")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/SkillUI"]
-position = Vector2(508, 273)
-texture = ExtResource("3_c37im")
+[node name="BG" type="Sprite2D" parent="Player/SkillUI"]
+position = Vector2(592, 335)
+scale = Vector2(0.859492, 1.9729)
+texture = ExtResource("4_jm2q3")
+
+[node name="TileGroup" parent="Player/SkillUI" instance=ExtResource("12_nqgqt")]
+position = Vector2(494, 186)
 
 [node name="ColorRect" type="ColorRect" parent="Player/SkillUI"]
 material = SubResource("ShaderMaterial_0gqbr")
@@ -58,6 +66,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="LeftButton" type="TextureButton" parent="Player/SkillUI"]
+offset_left = 382.0
+offset_top = 286.0
+offset_right = 482.0
+offset_bottom = 386.0
+rotation = -0.758239
+texture_normal = ExtResource("7_ajb1w")
+
+[node name="RightButton" type="TextureButton" parent="Player/SkillUI"]
+offset_left = 731.0
+offset_top = 215.0
+offset_right = 831.0
+offset_bottom = 315.0
+rotation = 0.783103
+texture_normal = ExtResource("8_ibk8h")
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="Player"]
+
+[node name="Inventory" parent="Player/CanvasLayer3" instance=ExtResource("11_gi2sm")]
+position = Vector2(447, 412)
 
 [node name="Slime" parent="." instance=ExtResource("5_obdrs")]
 
@@ -169,13 +198,9 @@ position = Vector2(66, 66)
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("9_6lejp")
 
-[node name="Inventory" parent="." instance=ExtResource("11_gi2sm")]
-position = Vector2(69, 410)
-
-[node name="TileGroup" parent="." instance=ExtResource("12_nqgqt")]
-position = Vector2(678, 123)
-
 [node name="Pickup" parent="." instance=ExtResource("13_t1gyg")]
 
 [connection signal="health_changed" from="Player" to="CanvasLayer2/HealthBar" method="_on_player_health_changed"]
-[connection signal="drop_area_clicked" from="Inventory" to="TileGroup" method="_on_inventory_drop_area_clicked"]
+[connection signal="button_down" from="Player/SkillUI/LeftButton" to="Player/SkillUI/TileGroup" method="rotate_left"]
+[connection signal="button_down" from="Player/SkillUI/RightButton" to="Player/SkillUI/TileGroup" method="rotate_right"]
+[connection signal="drop_area_clicked" from="Player/CanvasLayer3/Inventory" to="Player/SkillUI/TileGroup" method="_on_inventory_drop_area_clicked"]
