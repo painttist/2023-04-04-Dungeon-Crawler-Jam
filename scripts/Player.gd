@@ -127,7 +127,7 @@ func turn_left() -> void:
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "transform", transform.rotated_local(Vector3.UP, PI/2), TWEEN_DURATION)
 
-func attack() -> void:
+func attack(player_damage: int) -> void:
 	if ray_front.is_colliding():
 		var col = ray_front.get_collider()
 		if col.has_method("take_damage"):
@@ -136,7 +136,7 @@ func attack() -> void:
 				audio.play()
 				animation.play("attack")
 				await animation.animation_finished
-				col.take_damage(self, 2)
+				col.take_damage(self, player_damage)
 	acted.emit()
 
 func take_damage(amount):
@@ -200,8 +200,8 @@ func _physics_process(_delta):
 		return
 	
 	if inventory.interactions[row][col] != null:
-		handle_behaviour(inventory.interactions[row][col])
 		inventory.consume_durality(row, col)
+		handle_behaviour(inventory.interactions[row][col])
 	else:
 		acted.emit()
 	
@@ -226,5 +226,15 @@ func handle_behaviour(behaviour: int):
 			turn_right()
 		Globals.DRINK_POTION:
 			drink_potion()
+		Globals.ATTACK_KNIFE:
+			attack(1)
+		Globals.ATTACK_SWORD:
+			attack(3)
+		Globals.ATTACK_BROKEN_SWORD:
+			attack(2)
+		Globals.ATTACK_WAND:
+			attack(5)
+		Globals.ATTACK_BROKEN_WAND:
+			attack(1)
 		_:
-			attack()
+			attack(1)
