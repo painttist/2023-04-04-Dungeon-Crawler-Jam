@@ -22,6 +22,9 @@ enum ENEMY_TYPE {
 
 @export var type :ENEMY_TYPE
 @export var damage: int = 1
+@export var attack_cd: int = 2
+
+var attack_cd_counter = 0
 
 var reward
 
@@ -100,13 +103,12 @@ func no_intersect_to_dir(dir: Vector3):
 	params.collision_mask = 1
 	return space_state.intersect_ray(params).is_empty()
 
-func move_towards_player():
-	if health <= 0:
-		return
-	var dist = get_dist_to_player()
-	if (dist <= MIN_MOVE_DISTANCE):
-		if animation.is_playing():
-			await animation.animation_finished
+func attack():
+	if animation.is_playing():
+		await animation.animation_finished
+	attack_cd_counter += 1
+	if attack_cd_counter >= attack_cd:
+		attack_cd_counter = 0
 		match type:
 			self.ENEMY_TYPE.SLIME:
 				audio.stream = sfx_slime_attack
@@ -118,6 +120,13 @@ func move_towards_player():
 				animation.play("attack_strike")
 		await animation.animation_finished
 		player.take_damage(damage)
+
+func move_towards_player():
+	if health <= 0:
+		return
+	var dist = get_dist_to_player()
+	if (dist <= MIN_MOVE_DISTANCE):
+		attack()
 		return
 	
 	if (get_intersect_to_player() and dist >= MAX_DISTANCE) :
