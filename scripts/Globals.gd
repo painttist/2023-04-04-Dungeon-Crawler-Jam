@@ -50,6 +50,8 @@ var sprite_dict = {
 	WAND_DOWN: preload("res://Sprites/wand_down.png"),
 	LEFT: preload("res://Sprites/turn_left.png"),
 	RIGHT: preload("res://Sprites/turn_right.png"),
+	KNIFE: preload("res://Sprites/sword.png"),
+	POTION: preload("res://Sprites/potion.png")
 }
 
 func get_rand_tile_set():

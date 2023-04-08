@@ -19,36 +19,37 @@ func _ready():
 	for slot in slots:
 		if is_instance_of(slot, InventorySlot):
 			slot.slot_id = slot_count
+			slot.tile.set_item_type(null)
 			inventory_slots[slot_count / 3][slot_count % 3] = slot
 			slot_count += 1
 			
 	var slot: InventorySlot
-	slot  = inventory_slots[0][0]
-	slot.tile.set_item_type(Globals.LEFT)
-	interactions[0][0] = Globals.TURN_LEFT
+#	slot  = inventory_slots[0][0]
+#	slot.tile.set_item_type(Globals.LEFT)
+#	interactions[0][0] = Globals.TURN_LEFT
 	
 	slot  = inventory_slots[0][1]
 	slot.tile.set_item_type(Globals.ARROW)
 	interactions[0][1] = Globals.MOVE_FORWARD	
 	
-	slot  = inventory_slots[0][2]
-	slot.tile.set_item_type(Globals.RIGHT)
-	interactions[0][2] = Globals.TURN_RIGHT	
-	
-	slot  = inventory_slots[1][0]
-	slot.tile.set_item_type(Globals.ARROW)
-	slot.tile.set_item_rotation(-90)
-	interactions[1][0] = Globals.MOVE_LEFT	
-	
-	slot  = inventory_slots[1][1]
-	slot.tile.set_item_type(Globals.ARROW)
-	slot.tile.set_item_rotation(180)	
-	interactions[1][1] = Globals.MOVE_BACK
-	
-	slot  = inventory_slots[1][2]
-	slot.tile.set_item_type(Globals.ARROW)
-	slot.tile.set_item_rotation(90)	
-	interactions[1][2] = Globals.MOVE_RIGHT
+#	slot  = inventory_slots[0][2]
+#	slot.tile.set_item_type(Globals.RIGHT)
+#	interactions[0][2] = Globals.TURN_RIGHT	
+#
+#	slot  = inventory_slots[1][0]
+#	slot.tile.set_item_type(Globals.ARROW)
+#	slot.tile.set_item_rotation(-90)
+#	interactions[1][0] = Globals.MOVE_LEFT	
+#
+#	slot  = inventory_slots[1][1]
+#	slot.tile.set_item_type(Globals.ARROW)
+#	slot.tile.set_item_rotation(180)	
+#	interactions[1][1] = Globals.MOVE_BACK
+#
+#	slot  = inventory_slots[1][2]
+#	slot.tile.set_item_type(Globals.ARROW)
+#	slot.tile.set_item_rotation(90)	
+#	interactions[1][2] = Globals.MOVE_RIGHT
 	
 #	# check inventory init
 #	print("check inventory init")

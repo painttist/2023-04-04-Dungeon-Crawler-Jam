@@ -41,6 +41,11 @@ func check_pickup(collided: Node3D) -> bool:
 		collided.picked_up(self)
 		return true
 	return false
+	
+func drink_potion():
+	print("player drink potion")
+	health += 1
+	health_changed.emit(health)
 
 func move_forward() -> void:
 	var will_move = false
@@ -213,5 +218,7 @@ func handle_behaviour(behaviour: int):
 			turn_left()
 		Globals.TURN_RIGHT:
 			turn_right()
+		Globals.DRINK_POTION:
+			drink_potion()
 		_:
 			attack()

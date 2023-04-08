@@ -103,12 +103,20 @@ func _input_event(viewport, event, shape_idx):
 			# event.position is dragging offset
 			drag_offset = local_pos
 			original_pos = self.global_position 
-			self.input_pickable = false
+#			self.input_pickable = false
 		elif is_dragging:
+			pass
+#			print("return animation")
+#			is_dragging = false
+#			position = original_pos	# TODO: animation
+#			self.input_pickable = true
+
+	if event is InputEventMouseButton and event.is_action_pressed("RightMouse"):
+		if is_dragging:
 			print("return animation")
 			is_dragging = false
 			position = original_pos	# TODO: animation
-			self.input_pickable = true
+#			self.input_pickable = true
 
 func is_valid_position(pos: Vector2) -> bool:
 	print("check valid position", pos)
@@ -128,7 +136,7 @@ func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vecto
 			inventory.handle_drop_placement(slot_id, self)
 			position = original_pos
 #			self.visible = false
-			self.input_pickable = true
+#			self.input_pickable = true
 			
 			# restore player action
 			skill_ui.visible = false
@@ -137,4 +145,4 @@ func _on_inventory_drop_area_clicked(inventory: Inventory, event_position: Vecto
 			print("return by drop")
 			position = original_pos
 			drag_offset = Vector2.ZERO
-			self.input_pickable = true
+#			self.input_pickable = true
