@@ -274,3 +274,5 @@ func handle_behaviour(behaviour: int):
 
 func restart_game():
 	get_tree().reload_current_scene()
+	Globals.enemy_actions_stack = []
+	Globals.enemy_action_running = false

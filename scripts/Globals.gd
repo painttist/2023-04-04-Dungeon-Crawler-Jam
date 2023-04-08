@@ -25,6 +25,8 @@ enum {
 #]
 
 const slime_loot = [
+	[[SHIELD, ARROW], [null, null]],
+	[[SHIELD, KNIFE], [null, null]],
 	[[KNIFE, ARROW], [null, null]],
 	[[KNIFE, ARROW], [null, null]],
 	[[KNIFE, LEFT], [null, null]],
@@ -38,7 +40,12 @@ const slime_loot = [
 
 const chest_loot = [
 	[[SWORD_UP, null], [SWORD_DOWN, LEFT]],
-	
+	[[SWORD_UP, null], [SWORD_DOWN, POTION]],
+	[[SWORD_UP, null], [SWORD_DOWN, ARROW]],
+	[[POTION, POTION], [POTION, POTION]],
+	[[WAND_UP, null], [WAND_DOWN, null]],
+	[[WAND_UP, SHIELD], [WAND_DOWN, null]],
+	[[KNIFE, LEFT], [null, null]],	
 ]
 
 const wolf_loot = [
