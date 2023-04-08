@@ -12,12 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bdbgf7mtym17r" path="res://Sprites/button_turn_right.png" id="8_ckp3m"]
 [ext_resource type="Texture2D" uid="uid://tlv4yv1xjv85" path="res://Sprites/heart_icon.png" id="9_6lejp"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="9_jmyin"]
-[ext_resource type="Texture2D" uid="uid://bg6tcg2ay2xux" path="res://Sprites/skill_ui_leave.png" id="9_kalhs"]
 [ext_resource type="AudioStream" uid="uid://d3thkm84gachi" path="res://Audio/Pretty Dungeon LOOP.wav" id="9_t2ldl"]
+[ext_resource type="Texture2D" uid="uid://2inaneyp21aa" path="res://Sprites/button_close_small.png" id="9_u5myb"]
 [ext_resource type="PackedScene" uid="uid://2yp2uoa0xbgu" path="res://Inventory/Inventory.tscn" id="11_gi2sm"]
 [ext_resource type="PackedScene" uid="uid://da4aok56pfgc3" path="res://Inventory/TileGroup.tscn" id="12_nqgqt"]
 [ext_resource type="PackedScene" uid="uid://cwvlsfbtdge2o" path="res://Pickup/Pickup.tscn" id="13_t1gyg"]
-[ext_resource type="Texture2D" uid="uid://h030lwx4xpcj" path="res://Sprites/turn_left.png" id="15_wr3ed"]
+[ext_resource type="Texture2D" uid="uid://b6f6sijuyrdlg" path="res://Sprites/button_restart.png" id="15_k0gn8"]
 [ext_resource type="Script" path="res://scripts/ShieldUI.gd" id="16_87btl"]
 [ext_resource type="Texture2D" uid="uid://bf80yrkp7id3q" path="res://Sprites/shield_clean.png" id="16_k3g2t"]
 
@@ -87,11 +87,11 @@ offset_bottom = 350.0
 texture_normal = ExtResource("8_ckp3m")
 
 [node name="LeaveButton" type="TextureButton" parent="Player/SkillUI"]
-offset_left = 688.0
-offset_top = 66.0
-offset_right = 788.0
-offset_bottom = 166.0
-texture_normal = ExtResource("9_kalhs")
+offset_left = 717.0
+offset_top = 119.0
+offset_right = 817.0
+offset_bottom = 219.0
+texture_normal = ExtResource("9_u5myb")
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="Player"]
 
@@ -176,7 +176,7 @@ offset_top = 32.0
 offset_right = 1138.0
 offset_bottom = 132.0
 scale = Vector2(0.80878, 0.792772)
-texture_normal = ExtResource("15_wr3ed")
+texture_normal = ExtResource("15_k0gn8")
 
 [node name="HealthBar" type="Node2D" parent="CanvasLayer2"]
 script = ExtResource("9_jmyin")
